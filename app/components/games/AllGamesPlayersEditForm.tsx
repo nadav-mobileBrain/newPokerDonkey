@@ -26,15 +26,14 @@ const AllGamesPlayersEditForm = ({ player, onUpdate }: any) => {
         />
         <AppText style={styles.playerName}>{playerDetails.nickName}</AppText>
       </View>
-      <AppTextInput
+      <TextInput
         style={styles.playerData}
         keyboardType="numeric"
         value={String(player.profit)}
         onChangeText={(value: any) => handleChange("profit", value)}
       />
-      <AppTextInput
+      <TextInput
         style={[styles.playerData, styles.data]}
-        width="15%"
         keyboardType="numeric"
         value={String(player.buy_ins_amount)}
         onChangeText={(value: any) => handleChange("buy_ins_amount", value)}
