@@ -12,7 +12,11 @@ export default {
       resizeMode: "contain",
       backgroundColor: "#ffffff",
     },
-    plugins: ["@react-native-google-signin/google-signin"],
+    plugins: [
+      "@react-native-google-signin/google-signin",
+      "expo-secure-store",
+      "expo-font",
+    ],
     ios: {
       supportsTablet: true,
       bundleIdentifier: "com.nadavg.newpokerdonkey",
