@@ -1,6 +1,3 @@
-//ios
-///android
-//web
 import React, { useState, useEffect } from "react";
 import { StyleSheet, ImageBackground, View } from "react-native";
 
@@ -21,45 +18,35 @@ import {
   statusCodes,
   isErrorWithCode,
 } from "@react-native-google-signin/google-signin";
-interface GoogleUser {
-  idToken: string | null;
-  accessToken: string | null;
-  user: {
-    email: string;
-    id: string;
-    givenName: string;
-    familyName: string;
-    photo: string | null;
-    googleId: string;
-  };
-}
 
 const RegisterScreen = () => {
   const signinWithGoogleApi = useApi(usersApi.googleSignin);
   const loginApi = useApi(authApi.login);
   const auth = useAuth();
   const [error, setError] = useState<string | null>(null);
-  const [userInfo, setUserInfo] = useState<GoogleUser | null>(null);
+  const [userInfo, setUserInfo] = useState<any | null>(null);
 
-  useEffect(() => {
+  const configureGoogleSignin = async () => {
     GoogleSignin.configure({
       webClientId:
         "642539761997-uu7qdgioieccn89baa9v8tkhc84r0nbu.apps.googleusercontent.com",
     });
+  };
+  useEffect(() => {
+    configureGoogleSignin();
   }, []);
 
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
-      const userData = await GoogleSignin.signIn();
-
-      setUserInfo(userData as any);
-
+      const userInfo = await GoogleSignin.signIn();
+      setUserInfo(userInfo);
       setError(null);
+
       const result = await signinWithGoogleApi.request(userInfo);
 
       if (!result.ok) {
-        if (result.data) setError(result.data.error);
+        if (result.data) setError((result.data as any).error);
         else {
           setError("An unexpected error occurred.");
           logger.log(result);
@@ -67,7 +54,7 @@ const RegisterScreen = () => {
         return;
       }
 
-      const user = result?.data?.user;
+      const user = (result?.data as any)?.user;
 
       const { data: authToken } = await loginApi.request(user);
 

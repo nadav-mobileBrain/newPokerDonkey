@@ -5,15 +5,21 @@ import { ApiResponse } from "apisauce";
 const endpoint = "api/users";
 
 interface UserInfo {
-  idToken: string;
-  email: string;
-  id: string;
-  givenName: string;
-  familyName: string;
-  photo: string | null;
+  data: {
+    idToken: string;
+    user: {
+      email: string;
+      id: string;
+      givenName: string;
+      familyName: string;
+      photo: string | null;
+      google_id: string;
+    };
+  };
 }
 
-const googleSignin = (userInfo: UserInfo): Promise<ApiResponse<any>> => {
+const googleSignin = (userInfo: UserInfo) => {
+  console.log("sds", userInfo);
   return client.post(`${endpoint}/googleSignin`, userInfo);
 };
 

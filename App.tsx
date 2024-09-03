@@ -1,10 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import { Button, StyleSheet, Text, View } from "react-native";
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  User,
-} from "@react-native-google-signin/google-signin";
+import React from "react";
+import { StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import navigationTheme from "./app/navigation/navigationTheme";
@@ -20,32 +15,19 @@ import {
 import * as Font from "expo-font";
 import AppNavigator from "./app/navigation/AppNavigator";
 import AuthNavigator from "./app/navigation/AuthNavigator";
-// Define the user type based on what GoogleSignin.signIn() returns
-interface GoogleUser {
-  idToken: string | null;
-  accessToken: string | null;
-  user: {
-    email: string;
-    id: string;
-    givenName: string;
-    familyName: string;
-    photo: string | null;
-    googleId: string;
-  };
-}
+
 Aptabase.init("A-EU-6948664941"); // 👈 this is where you enter your App Key
 
 export default function App() {
-  const [user, setUser] = useState<GoogleUser | null>(null);
+  const [user, setUser] = useState<any | null>(null);
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   const restoreUser = async () => {
     const user = await authStorage.getUser();
     console.log("🚀 ~ restoreUser ~ user:", user);
 
-    // console.log("🚀 ~ restoreUser ~ user:", user);
-    //if (user) setUser(user);
-    // Aptabase.trackEvent('User Restored', { userId: user?.userId });
+    if (user) setUser(user);
+    //  Aptabase.trackEvent("User Restored", { userId: user?.id });
   };
 
   const loadFonts = async () => {
@@ -61,34 +43,12 @@ export default function App() {
   };
 
   const [error, setError] = useState<string | null>(null);
-  const [userInfo, setUserInfo] = useState<GoogleUser | null>(null);
+  const [userInfo, setUserInfo] = useState<any | null>(null);
 
   useEffect(() => {
     restoreUser();
     loadFonts();
-    //GoogleSignin.configure();
   }, []);
-
-  // const signIn = async () => {
-  //   try {
-  //     await GoogleSignin.hasPlayServices();
-  //     const user = await GoogleSignin.signIn();
-  //     setUserInfo(user as unknown as GoogleUser);
-  //     setError(null);
-  //   } catch (error: unknown) {
-  //     // Handle the error type
-  //     if (error instanceof Error) {
-  //       setError(error.message);
-  //     } else {
-  //       setError(String(error));
-  //     }
-  //   }
-  // };
-  // const logOut = () => {
-  //   setUserInfo(null);
-  //   GoogleSignin.revokeAccess();
-  //   GoogleSignin.signOut();
-  // };
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
@@ -96,22 +56,6 @@ export default function App() {
         {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>
-
-    // <View style={styles.container}>
-    //   <Text>{JSON.stringify(error)}</Text>
-    //   {userInfo && <Text>{JSON.stringify(userInfo)}</Text>}
-    //   {userInfo ? (
-    //     <Button title="logout" onPress={logOut} />
-    //   ) : (
-    //     <GoogleSigninButton
-    //       style={{ width: 192, height: 48 }}
-    //       size={GoogleSigninButton.Size.Wide}
-    //       color={GoogleSigninButton.Color.Dark}
-    //       onPress={signIn}
-    //     />
-    //   )}
-    //   <StatusBar style="auto" />
-    // </View>
   );
 }
 

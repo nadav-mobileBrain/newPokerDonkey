@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 
 const key = "authToken";
 
-const storeToken = async (authToken: string) => {
+const storeToken = async (authToken: any) => {
   try {
     await SecureStore.setItemAsync(key, authToken);
   } catch (error) {
@@ -11,7 +11,7 @@ const storeToken = async (authToken: string) => {
   }
 };
 
-const getToken = async (): Promise<string | null> => {
+const getToken = async (): Promise<any | null> => {
   try {
     return await SecureStore.getItemAsync(key);
   } catch (error) {
@@ -22,6 +22,7 @@ const getToken = async (): Promise<string | null> => {
 
 const getUser = async () => {
   const token = await getToken();
+  console.log("🚀 ~ getUser ~ token:", token);
   return token ? jwtDecode(token) : null;
 };
 
