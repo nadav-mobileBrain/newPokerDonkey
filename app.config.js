@@ -1,11 +1,11 @@
 export default {
   expo: {
-    name: "newPokerDonkey",
+    name: "PokerDonkey",
     slug: "newPokerDonkey",
     scheme: "newpokerdonkey",
     version: "1.0.0",
     orientation: "portrait",
-    icon: "./assets/icon.png",
+    icon: "./app/assets/appLogo.png",
     userInterfaceStyle: "light",
     splash: {
       image: "./assets/splash.png",

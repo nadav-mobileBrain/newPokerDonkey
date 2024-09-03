@@ -73,7 +73,7 @@ const useNotifications = (notificationListener: any = "") => {
           })
         ).data;
         if (!user) return;
-        if (user.userId) {
+        if (user?.userId) {
           users.updateExpoPushToken(user.userId, pushTokenString);
         }
         return pushTokenString;

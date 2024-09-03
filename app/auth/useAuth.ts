@@ -26,7 +26,7 @@ interface AuthToken {
 
 const useAuth = () => {
   const { user, setUser } = useContext(AuthContext) as {
-    user: User | null;
+    user: any | null;
     setUser: (user: User | null) => void;
   };
 
