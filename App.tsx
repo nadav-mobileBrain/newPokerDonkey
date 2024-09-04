@@ -15,8 +15,11 @@ import {
 import * as Font from "expo-font";
 import AppNavigator from "./app/navigation/AppNavigator";
 import AuthNavigator from "./app/navigation/AuthNavigator";
+import logger from "./app/utility/logger";
 
 Aptabase.init("A-EU-6948664941"); // 👈 this is where you enter your App Key
+
+logger.start();
 
 export default function App() {
   const [user, setUser] = useState<any | null>(null);

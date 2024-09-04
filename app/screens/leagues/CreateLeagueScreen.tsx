@@ -60,7 +60,7 @@ const CreateLeagueScreen = ({ navigation }: { navigation: any }) => {
           source={require("../../assets/newLogo.webp")}>
           <View style={styles.overlay} />
           <AppLogo />
-          <HeaderText>Create League</HeaderText>
+          <HeaderText style={{ color: colors.light }}>Create League</HeaderText>
           <AppForm
             initialValues={{ leagueName: "" }}
             onSubmit={handleSubmit}

@@ -2,11 +2,7 @@ import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useAptabase } from "../hooks/useAptabase";
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
-} from "@react-native-google-signin/google-signin";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 import ActivityIndicator from "../components/ActivityIndicator";
 import Screen from "../components/Screen";

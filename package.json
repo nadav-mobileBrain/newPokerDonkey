@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@aptabase/react-native": "^0.3.10",
-    "@bugsnag/expo": "^51.0.1",
+    "@bugsnag/expo": "^51.0.0",
     "@expo-google-fonts/roboto": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",
     "@react-native-community/netinfo": "11.3.1",
@@ -23,6 +23,8 @@
     "dayjs": "^1.11.13",
     "eas-cli": "^11.0.3",
     "expo": "~51.0.28",
+    "expo-application": "~5.9.1",
+    "expo-constants": "~16.0.2",
     "expo-crypto": "~13.0.2",
     "expo-dev-client": "~4.0.25",
     "expo-device": "~6.0.2",
@@ -48,6 +50,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@bugsnag/plugin-expo-eas-sourcemaps": "^51.0.0",
+    "@bugsnag/source-maps": "^2.3.3",
     "@types/jwt-decode": "^3.1.0",
     "@types/react": "~18.2.45",
     "@types/react-native": "^0.73.0",

@@ -67,11 +67,14 @@ const EditLeagueScreen = ({
     };
 
     const result = await updateLeagueDetailsApi.request(completeLeagueInfo);
+    console.log("🚀 ~ handleSubmit ~ result:", result.data);
     if (!result.ok) {
-      if (result.data) setError((result.data as any).error);
-      else {
-        setError("An unexpected error occurred.");
+      if (result.data) {
+        setError((result.data as any).error);
         logger.log(result);
+      } else {
+        setError("An unexpected error occurred.");
+        logger.log(result.originalError);
       }
       return;
     }

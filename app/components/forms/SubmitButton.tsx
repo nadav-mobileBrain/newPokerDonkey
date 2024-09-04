@@ -12,7 +12,7 @@ interface SubmitButtonProps {
 const SubmitButton: React.FC<SubmitButtonProps> = ({
   title,
   icon = null,
-  color = "blue",
+  color = "gold",
 }) => {
   const { handleSubmit } = useFormikContext();
 

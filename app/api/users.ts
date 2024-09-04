@@ -1,6 +1,5 @@
 import client from "./client";
-// import { Platform } from "react-native";
-import { ApiResponse } from "apisauce";
+import { Platform } from "react-native";
 
 const endpoint = "api/users";
 
@@ -59,28 +58,38 @@ const updateNotificationSettings = (userId: String, isEnabled: Boolean) => {
 // };
 
 interface UserInfo {
+  image?: string;
   nickName: string;
   userId: string;
-  image: string;
+}
+
+interface ImageData {
+  name: string;
+  type: string;
+  uri: string;
 }
 
 const updatePersonaldetails = (userInfo: UserInfo) => {
   if (userInfo.image) {
     const data = new FormData();
 
-    function getFileExtension(filePath: string) {
+    function getFileExtension(filePath: string): string {
       return filePath.substring(filePath.lastIndexOf("."));
     }
 
     data.append("nickName", userInfo.nickName);
     data.append("userId", userInfo.userId);
 
-    const imageBlob = new Blob([userInfo.image], { type: "image/jpeg" });
-    data.append(
-      "image",
-      imageBlob,
-      userInfo.nickName + getFileExtension(userInfo.image)
-    );
+    const imageData: ImageData = {
+      name: userInfo.nickName + getFileExtension(userInfo.image),
+      type: "image/jpeg",
+      uri:
+        Platform.OS === "android"
+          ? userInfo.image
+          : userInfo.image.replace("file://", ""),
+    };
+
+    data.append("image", imageData as any);
     client.headers["Content-Type"] = "multipart/form-data";
 
     return client.put(`${endpoint}/updatePersonaldetails`, data);

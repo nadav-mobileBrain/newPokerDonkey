@@ -56,10 +56,12 @@ const AddRemovePlayers = ({ route, navigation }: any) => {
     const updatedGameData = result.data;
 
     if (!result.ok) {
-      if (result.data) setError((result.data as any).error);
-      else {
+      if (result.data) {
+        setError((result.data as any).error);
+        logger.log(result.data);
+      } else {
         setError("An unexpected error occurred.");
-        logger.log(result);
+        logger.log(result.problem);
       }
       return;
     }

@@ -15,6 +15,7 @@ export default {
     plugins: [
       "@react-native-google-signin/google-signin",
       "expo-secure-store",
+      "@bugsnag/plugin-expo-eas-sourcemaps",
       "expo-font",
     ],
     ios: {
@@ -34,6 +35,9 @@ export default {
       favicon: "./assets/favicon.png",
     },
     extra: {
+      bugsnag: {
+        apiKey: "1cc2004c8822004ef0fac22062e3c71b",
+      },
       eas: {
         projectId: "d1c31053-2dec-4269-a289-a4fa2410ac0b",
       },

@@ -90,8 +90,10 @@ const NewGameScreen = ({
     setEndDialogVisible(false);
     const result = await endGameApi.request(game.id, userGamesData, league);
     if (!result.ok) {
-      if (result.data) setError((result.data as any).error);
-      else {
+      if (result.data) {
+        setError((result.data as any).error);
+        logger.log(result.data);
+      } else {
         setError("An unexpected error occurred.");
         logger.log(result);
       }

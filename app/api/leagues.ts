@@ -45,41 +45,56 @@ const joinLeague = (leagueData: any) => {
 const getLeaguePlayers = (leagueId: string) =>
   client.get(`${endpoint}/getLeaguePlayersByLeagueId/${leagueId}`);
 
-const updateLeagueDetails = (leagueInfo: any) => {
-  if (leagueInfo.image) {
-    const data = new FormData();
+interface LeaguePlayer {
+  id: string;
+  name: string;
+  created_at: string;
+  updated_at: string;
+  is_admin: boolean;
+  league_id: number;
+  user_id: number;
+}
 
-    function getFileExtension(filePath: any) {
-      return filePath.substring(filePath.lastIndexOf("."));
-    }
+interface LeagueInfo {
+  image?: string;
+  leagueName: string;
+  leagueId: string;
+  leaguePlayers: LeaguePlayer[] | null;
+}
 
-    data.append("leagueName", leagueInfo.leagueName);
-    data.append("leagueId", leagueInfo.leagueId);
-    data.append("leaguePlayers", JSON.stringify(leagueInfo.leaguePlayers));
+const updateLeagueDetails = async (leagueInfo: LeagueInfo) => {
+  const data = new FormData();
 
-    // data.append("image", {
-    //   name: leagueInfo.leagueName + getFileExtension(leagueInfo.image), /// Add the extension to the file name
-    //   type: "image/jpeg",
-    //   uri:
-    //     Platform.OS === "android"
-    //       ? leagueInfo.image
-    //       : leagueInfo.image.replace("file://", ""),
-    // });
+  data.append("leagueName", leagueInfo.leagueName);
+  data.append("leagueId", leagueInfo.leagueId.toString());
+  data.append("leaguePlayers", JSON.stringify(leagueInfo.leaguePlayers));
 
-    const imageBlob = new Blob([leagueInfo.image], { type: "image/jpeg" });
-    data.append(
-      "image",
-      imageBlob,
-      leagueInfo.leagueName + getFileExtension(leagueInfo.image) /// Add the extension to the file name
-    );
-    client.headers["Content-Type"] = "multipart/form-data";
+  if (
+    leagueInfo.image &&
+    leagueInfo.image !==
+      "https://backend-donk-images.s3.il-central-1.amazonaws.com/leagueAvatars/league.jpg"
+  ) {
+    const imageUri =
+      Platform.OS === "android"
+        ? leagueInfo.image
+        : leagueInfo.image.replace("file://", "");
+    const imageName = imageUri.split("/").pop() || "image.jpg";
 
-    return client.put(`${endpoint}/updateLeagueDetails`, data);
-  } else {
-    return client.put(`${endpoint}/updateLeagueDetails`, leagueInfo);
+    data.append("image", {
+      uri: imageUri,
+      type: "image/jpeg",
+      name: imageName,
+    } as any);
   }
-};
 
+  console.log("FormData:", data);
+
+  return client.put(`${endpoint}/updateLeagueDetails`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
 const deleteLeague = (leagueId: string) => {
   return client.delete(`${endpoint}/deleteLeague/${leagueId}`);
 };

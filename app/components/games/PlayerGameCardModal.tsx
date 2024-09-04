@@ -84,8 +84,10 @@ const PlayerGameCardModal = ({
     );
     if (!result.ok) {
       const errorMsg = (result.data as any).error;
-      if (result.data) setError(errorMsg);
-      else {
+      if (result.data) {
+        setError(errorMsg);
+        logger.log(errorMsg);
+      } else {
         setError("An unexpected error occurred.");
         logger.log(result);
       }

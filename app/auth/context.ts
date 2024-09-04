@@ -15,7 +15,7 @@ interface GoogleUser {
 }
 const AuthContext = React.createContext<null | {
   user: any | null;
-  setUser: React.Dispatch<React.SetStateAction<any | null | any>>;
+  setUser: React.Dispatch<React.SetStateAction<any | null>>;
 }>(null);
 
 export default AuthContext;

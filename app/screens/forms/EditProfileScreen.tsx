@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import * as Yup from "yup";
 import { LinearGradient } from "expo-linear-gradient";
@@ -38,35 +38,32 @@ const EditProfileScreen = ({ navigation }: any) => {
   const auth = useAuth();
   const { user } = useAuth();
   const [error, setError] = useState<string>("");
-  const [imageUri, setImageUri] = useState("");
   const [deleteDialog, setDeleteDialog] = useState(false);
 
-  useEffect(() => {
-    user?.image && user.image.startsWith("https")
-      ? setImageUri(user.image)
-      : setImageUri(`${config.s3.baseUrl}${user?.image}`);
-  }, []);
+  const imageUri = useMemo(() => {
+    if (!user?.image) return "";
+    return user.image.startsWith("https")
+      ? user.image
+      : `${config.s3.baseUrl}${user.image}`;
+  }, [user?.image]);
+
+  const [localImageUri, setLocalImageUri] = useState(imageUri);
 
   const handleSubmit = async (userInfo: any) => {
     const completeUserInfo = {
       ...userInfo,
-      image: imageUri,
+      image: localImageUri,
       userId: user?.userId,
     };
 
     const result = await updatePersonaldetailsApi.request(completeUserInfo);
+    console.log("🚀 ~ handleSubmit ~ result:", result);
 
     if (!result.ok) {
-      if (!result.ok) {
-        const errorMsg =
-          (result.data as any)?.error || "An unexpected error occurred.";
-        setError(errorMsg);
-        logger.log(result); // Log the entire result for debugging
-        return;
-      } else {
-        setError("An unexpected error occurred.");
-        logger.log(result);
-      }
+      const errorMsg =
+        (result.data as any)?.error || "An unexpected error occurred.";
+      setError(errorMsg);
+      logger.log(errorMsg);
       return;
     }
 
@@ -89,9 +86,8 @@ const EditProfileScreen = ({ navigation }: any) => {
       setError("An unexpected error occurred.");
       logger.log(result);
     }
-    return;
+    auth.logOut();
   };
-  auth.logOut();
 
   return (
     <>
@@ -108,8 +104,8 @@ const EditProfileScreen = ({ navigation }: any) => {
             <AppFormField autoCorrect={false} icon="account" name="nickName" />
             <View style={{ alignItems: "flex-end" }}>
               <ImageInput
-                imageUri={imageUri}
-                onChangeImage={(uri) => setImageUri(uri)}
+                imageUri={localImageUri}
+                onChangeImage={(uri) => setLocalImageUri(uri)}
               />
             </View>
             <SubmitButton
@@ -126,7 +122,6 @@ const EditProfileScreen = ({ navigation }: any) => {
               handleConfirm={() => deleteAccount()}
             />
           )}
-
           <AppButton
             title="delete account"
             color="danger"

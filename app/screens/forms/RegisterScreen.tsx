@@ -46,8 +46,10 @@ const RegisterScreen = () => {
       const result = await signinWithGoogleApi.request(userInfo);
 
       if (!result.ok) {
-        if (result.data) setError((result.data as any).error);
-        else {
+        if (result.data) {
+          setError((result.data as any).error);
+          logger.log(result.data);
+        } else {
           setError("An unexpected error occurred.");
           logger.log(result);
         }
