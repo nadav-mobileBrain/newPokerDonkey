@@ -86,6 +86,7 @@ const SelectPlayersScreen = ({
       leagueId: league.id,
       gameAdminId,
     });
+    console.log("🚀 ~ startNewGame ~ result:", result);
 
     if (!result.ok) {
       if (result.data) setError((result.data as any).error);

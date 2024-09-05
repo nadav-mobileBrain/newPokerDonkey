@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-    color: colors.light,
+    color: colors.purple,
   },
   scrollView: {
     flex: 1,

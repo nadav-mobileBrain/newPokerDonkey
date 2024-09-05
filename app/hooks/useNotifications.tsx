@@ -50,6 +50,7 @@ const useNotifications = (notificationListener: any = "") => {
       const { status: existingStatus } =
         await Notifications.getPermissionsAsync();
       let finalStatus = existingStatus;
+
       if (existingStatus !== "granted") {
         const { status } = await Notifications.requestPermissionsAsync();
         finalStatus = status;
@@ -63,6 +64,7 @@ const useNotifications = (notificationListener: any = "") => {
       const projectId =
         Constants?.expoConfig?.extra?.eas?.projectId ??
         Constants?.easConfig?.projectId;
+
       if (!projectId) {
         handleRegistrationError("Project ID not found");
       }
@@ -72,6 +74,7 @@ const useNotifications = (notificationListener: any = "") => {
             projectId,
           })
         ).data;
+
         if (!user) return;
         if (user?.userId) {
           users.updateExpoPushToken(user.userId, pushTokenString);

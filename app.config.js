@@ -1,6 +1,6 @@
 export default {
   expo: {
-    name: "PokerDonkey",
+    name: "Poker Donkey",
     slug: "newPokerDonkey",
     scheme: "newpokerdonkey",
     version: "1.0.1",
