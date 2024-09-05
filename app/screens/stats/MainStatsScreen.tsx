@@ -42,7 +42,7 @@ const MainStatsScreen = ({ route }: { route: any }) => {
         style={styles.background}
         source={require("../../assets/appLogo.webp")}>
         <View style={styles.overlay} />
-        <Container position="top" />
+        <Container position="top" style={{ width: "100%" }} />
         <PlayerAvatar />
         <AppLogo />
         <PlayerStatsCard league={league} />

@@ -18,7 +18,6 @@ interface UserInfo {
 }
 
 const googleSignin = (userInfo: UserInfo) => {
-  console.log("sds", userInfo);
   return client.post(`${endpoint}/googleSignin`, userInfo);
 };
 
@@ -30,6 +29,10 @@ const updateNotificationSettings = (userId: String, isEnabled: Boolean) => {
   return client.put(`${endpoint}/updateNotificationSettings/${userId}`, {
     isEnabled,
   });
+};
+
+const getTestUserDetails = () => {
+  return client.get(`${endpoint}/testUserDetails`);
 };
 
 // const register = (userInfo) => {
@@ -121,4 +124,5 @@ export default {
   checkNotification,
   updateNotificationSettings,
   deleteAccount,
+  getTestUserDetails,
 };

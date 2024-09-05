@@ -10,26 +10,50 @@ import AppButton from "../components/AppButton";
 import colors from "../config/colors";
 import AppLogo from "../components/AppLogo";
 import useAuth from "../auth/useAuth";
+import useApi from "../hooks/useApi";
+import { useAptabase } from "../hooks/useAptabase";
 import authApi from "../api/auth";
 import AppText from "../components/AppText";
 import HowToPlay from "../components/HowToPlay";
 import Screen from "../components/Screen";
-//import { useAptabase } from "../hooks/useAptabase";
+import users from "../api/users";
 
 import { NavigationProp } from "@react-navigation/native";
 
+interface UserInfo {
+  email: string;
+  expoPushToken?: string;
+  familyName: string;
+  givenName: string;
+  google_id: string;
+  id: number;
+  nickName?: string;
+  created_at?: string;
+  is_active?: boolean;
+  last_login?: string;
+  token?: string;
+  updated_at?: string;
+}
+
 const WelcomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
-  ///const { trackEvent } = useAptabase();
+  const { trackEvent } = useAptabase();
   const { logIn, logOut } = useAuth();
 
+  const getTestUserDetailsApi = useApi(users.getTestUserDetails);
+
   const takeATour = async () => {
-    logOut();
     try {
-      const result = await authApi.login({
-        googleId: "100975266796150070789",
-      });
-      // trackEvent("login as guest");
-      logIn(result.data);
+      logOut();
+      const result = await getTestUserDetailsApi.request();
+
+      if (!result.ok) {
+        console.log("🚀 ~ takeATour ~ result.data:", result.data);
+        return;
+      }
+      const testUser: UserInfo = (result.data as any).testUser;
+      const loginAsGuest = await authApi.login(testUser);
+      logIn(loginAsGuest.data);
+      trackEvent("login as guest");
     } catch (error) {
       console.error("Error during guest login", error);
     }

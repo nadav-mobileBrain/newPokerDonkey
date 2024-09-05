@@ -13,7 +13,7 @@ import colors from "../config/colors";
 import useAuth from "../auth/useAuth";
 import config from "../config/config";
 import routes from "../navigation/routes";
-import Container, { Toast } from "toastify-react-native";
+import ToastContainer, { Toast } from "toastify-react-native";
 
 const menuItems = [
   {
@@ -56,15 +56,16 @@ const AccountScreen = ({ navigation }: { navigation: any }) => {
 
   const handleLogout = async () => {
     configureGoogleSignin();
-    await GoogleSignin.signOut();
+    GoogleSignin.revokeAccess();
+    GoogleSignin.signOut();
     logOut();
   };
 
   return (
     <>
-      <Container position="center" style={{ top: 20 }} />
       <ActivityIndicator visible={!user} />
       <Screen style={styles.screen}>
+        <ToastContainer style={{ width: "100%", top: 20 }} position="top" />
         <LinearGradient
           colors={colors.secondaryGradientArray}
           style={styles.background}>

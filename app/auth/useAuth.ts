@@ -31,7 +31,6 @@ const useAuth = () => {
   };
 
   const logIn = (authToken: any) => {
-    console.log("🚀 ~ logIn ~ authToken", authToken);
     const user = jwtDecode<any>(authToken.token);
     setUser(user);
     authStorage.storeToken(authToken.token);
@@ -40,8 +39,8 @@ const useAuth = () => {
   const logOut = async () => {
     setUser(null);
     authStorage.removeToken();
-    await GoogleSignin.revokeAccess();
-    await GoogleSignin.signOut();
+    GoogleSignin.revokeAccess();
+    GoogleSignin.signOut();
   };
 
   return { user, logIn, logOut };

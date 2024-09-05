@@ -147,13 +147,13 @@ const NewGameScreen = ({
 
   return (
     <>
-      <ToastContainer position="top" />
+      <ToastContainer position="top" style={{ width: "100%" }} />
       <ActivityIndicator visible={!isFocused} />
       <Screen style={styles.container}>
         <LinearGradient
           colors={colors.primaryGradientArray}
           style={styles.background}>
-          <HeaderText>New Game</HeaderText>
+          <HeaderText style={{ color: colors.gold }}>New Game</HeaderText>
           {dialogVisible && (
             <DialogComponent
               titleText="Take Control of Game"
@@ -188,6 +188,11 @@ const NewGameScreen = ({
               </AppText>
             </TouchableOpacity>
           )}
+
+          <View style={styles.headerContainer}>
+            <AppText style={styles.title}>Player</AppText>
+            <AppText style={styles.title}>Buy In</AppText>
+          </View>
           {game?.gameManager?.id != user?.userId && (
             <View>
               <AppText style={styles.noAdmin}>
@@ -219,10 +224,7 @@ const NewGameScreen = ({
                     ) : null
                   }
                   ItemSeparatorComponent={ListitemSeperator}
-                  ListHeaderComponent={() => (
-                    <GameHeader />
-                    // <GameHeader userGamesData={userGamesData} />
-                  )}
+                  //    ListHeaderComponent={() => <GameHeader />}
                 />
               </View>
               <AppButton
@@ -331,6 +333,20 @@ const styles = StyleSheet.create({
   },
   flatListContent: {
     flexGrow: 1,
+  },
+  headerContainer: {
+    flexDirection: "row-reverse",
+    width: "100%",
+    justifyContent: "space-between",
+    padding: 10,
+    backgroundColor: colors.gold,
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 20,
+    color: colors.blue,
+    textDecorationColor: colors.blue,
+    textDecorationLine: "underline",
   },
 });
 
