@@ -56,8 +56,8 @@ const AccountScreen = ({ navigation }: { navigation: any }) => {
 
   const handleLogout = async () => {
     configureGoogleSignin();
-    GoogleSignin.revokeAccess();
-    GoogleSignin.signOut();
+    // GoogleSignin.revokeAccess();
+    await GoogleSignin.signOut();
     logOut();
   };
 

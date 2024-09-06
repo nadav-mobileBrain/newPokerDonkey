@@ -39,8 +39,8 @@ const useAuth = () => {
   const logOut = async () => {
     setUser(null);
     authStorage.removeToken();
-    GoogleSignin.revokeAccess();
-    GoogleSignin.signOut();
+    //GoogleSignin.revokeAccess();
+    await GoogleSignin.signOut();
   };
 
   return { user, logIn, logOut };
