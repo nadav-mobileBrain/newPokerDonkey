@@ -17,6 +17,12 @@ export default {
       "expo-secure-store",
       "@bugsnag/plugin-expo-eas-sourcemaps",
       "expo-font",
+      [
+        "react-native-google-mobile-ads",
+        {
+          androidAppId: "ca-app-pub-4169403957560964~6914057081",
+        },
+      ],
     ],
     ios: {
       supportsTablet: true,

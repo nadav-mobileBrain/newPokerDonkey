@@ -17,7 +17,7 @@ import AppNavigator from "./app/navigation/AppNavigator";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import logger from "./app/utility/logger";
 
-Aptabase.init("A-EU-6948664941"); // 👈 this is where you enter your App Key
+Aptabase.init("A-EU-9645623283"); // 👈 this is where you enter your App Key
 
 logger.start();
 
@@ -29,15 +29,14 @@ export default function App() {
     const user = await authStorage.getUser();
     console.log("🚀 ~ restoreUser ~ user:", user);
 
-    if (user) setUser(user);
-    //  Aptabase.trackEvent("User Restored", { userId: user?.id });
+    if (user) {
+      setUser(user);
+      Aptabase.trackEvent("User Restored", { user: JSON.stringify(user) });
+    }
   };
 
   const loadFonts = async () => {
     await Font.loadAsync({
-      // "Montserrat-Regular": require("./app/assets/fonts/Montserrat-VariableFont_wght.ttf"),
-      // "Montserrat-Light": require("./app/assets/fonts/Montserrat-Light.ttf"),
-      // "Montserrat-SemiBold": require("./app/assets/fonts/Montserrat-SemiBold.ttf"),
       Roboto_400Regular,
       Roboto_700Bold,
       Roboto_500Medium,

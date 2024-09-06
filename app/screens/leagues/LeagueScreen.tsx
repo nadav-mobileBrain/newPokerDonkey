@@ -7,7 +7,7 @@ import {
   Platform,
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
-// import { TestIds, useInterstitialAd } from "react-native-google-mobile-ads";
+import { TestIds, useInterstitialAd } from "react-native-google-mobile-ads";
 
 import ActivityIndicator from "../../components/ActivityIndicator";
 import AppButton from "../../components/AppButton";
@@ -35,46 +35,48 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedLeagues, setSelectedLeagues] = useState(null);
   const { user } = useAuth();
-  //const [isAdLoading, setIsAdLoading] = useState(true);
+  const [isAdLoading, setIsAdLoading] = useState(true);
 
-  //   let adUnitId = Platform.select({
-  //     android: "ca-app-pub-2640391750032066/5726639519",
-  //     ios: "ca-app-pub-2640391750032066/9067118729",
-  //   });
+  const ANDROID_AD_UNIT_ID = "ca-app-pub-4169403957560964/7903733375";
+  let adUnitId =
+    Platform.select({
+      android: ANDROID_AD_UNIT_ID,
+      // ios: "ca-app-pub-2640391750032066/9067118729",
+    }) || null;
 
-  //   const { isLoaded, isClosed, load, show } = useInterstitialAd(
-  //     __DEV__ ? TestIds.INTERSTITIAL : adUnitId,
-  //     {
-  //       requestNonPersonalizedAdsOnly: true,
-  //     }
-  //   );
+  const { isLoaded, isClosed, load, show } = useInterstitialAd(
+    __DEV__ ? TestIds.INTERSTITIAL : adUnitId,
+    {
+      requestNonPersonalizedAdsOnly: true,
+    }
+  );
 
-  //   const loadAd = useCallback(() => {
-  //    // setIsAdLoading(true);
-  //    // load();
-  //   }, [load]);
+  const loadAd = useCallback(() => {
+    setIsAdLoading(true);
+    load();
+  }, [load]);
 
-  //   useEffect(() => {
-  //     loadAd();
-  //   }, [loadAd]);
+  useEffect(() => {
+    loadAd();
+  }, [loadAd]);
 
-  //   useEffect(() => {
-  //     if (isLoaded) {
-  //       setIsAdLoading(false);
-  //     }
-  //   }, [isLoaded]);
+  useEffect(() => {
+    if (isLoaded) {
+      setIsAdLoading(false);
+    }
+  }, [isLoaded]);
 
-  //   useEffect(() => {
-  //     if (isClosed && selectedItem && selectedLeagues) {
-  //       navigation.navigate(routes.LEAGUE_DETAILS, {
-  //         item: selectedItem,
-  //         data: selectedLeagues,
-  //       });
-  //       setSelectedItem(null);
-  //       setSelectedLeagues(null);
-  //       loadAd();
-  //     }
-  //   }, [isClosed, selectedItem, selectedLeagues, navigation, loadAd]);
+  useEffect(() => {
+    if (isClosed && selectedItem && selectedLeagues) {
+      navigation.navigate(routes.LEAGUE_DETAILS, {
+        item: selectedItem,
+        data: selectedLeagues,
+      });
+      setSelectedItem(null);
+      setSelectedLeagues(null);
+      loadAd();
+    }
+  }, [isClosed, selectedItem, selectedLeagues, navigation, loadAd]);
 
   useEffect(() => {
     if (isFocused) {
@@ -98,19 +100,19 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
       data: leagues,
     });
 
-    // if (isLoaded) {
-    //   show();
-    // } else {
-    //   navigation.navigate(routes.LEAGUE_DETAILS, {
-    //     item,
-    //     data: leagues,
-    //   });
-    //   loadAd();
-    // }
+    if (isLoaded) {
+      show();
+    } else {
+      navigation.navigate(routes.LEAGUE_DETAILS, {
+        item,
+        data: leagues,
+      });
+      loadAd();
+    }
   };
 
-  //   const isLoading = getLeaguesApi.loading || isAdLoading;
-  const isLoading = getLeaguesApi.loading ?? false;
+  const isLoading = getLeaguesApi.loading || isAdLoading;
+  // const isLoading = getLeaguesApi.loading ?? false;
 
   return (
     <>
