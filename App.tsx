@@ -44,8 +44,8 @@ export default function App() {
     setFontsLoaded(true);
   };
 
-  // const [error, setError] = useState<string | null>(null);
-  // const [userInfo, setUserInfo] = useState<any | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [userInfo, setUserInfo] = useState<any | null>(null);
 
   useEffect(() => {
     restoreUser();

@@ -23,11 +23,11 @@ const CardStatsScreen = ({ route }: { route: any }) => {
   const getStats = useApi(statsApi.getStatsForCard);
 
   const ANDROID_AD_UNIT_ID = "ca-app-pub-4169403957560964/7903733375";
-  const IOS_AD_UNIT_ID = "ca-app-pub-4169403957560964~5798113087";
+  //   const IOS_AD_UNIT_ID = "ca-app-pub-2640391750032066/5726635947";
 
   const adUnitId =
     Platform.select({
-      ios: IOS_AD_UNIT_ID,
+      // ios: IOS_AD_UNIT_ID,
       android: ANDROID_AD_UNIT_ID,
     }) || "";
 

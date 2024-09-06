@@ -26,12 +26,10 @@ const RegisterScreen = () => {
   const [error, setError] = useState<string | null>(null);
   const [userInfo, setUserInfo] = useState<any | null>(null);
 
-  const configureGoogleSignin = () => {
+  const configureGoogleSignin = async () => {
     GoogleSignin.configure({
       webClientId:
         "642539761997-uu7qdgioieccn89baa9v8tkhc84r0nbu.apps.googleusercontent.com",
-      offlineAccess: true,
-      forceCodeForRefreshToken: true,
     });
   };
   useEffect(() => {
@@ -63,8 +61,8 @@ const RegisterScreen = () => {
       const { data: authToken } = await loginApi.request(user);
 
       auth.logIn(authToken as any);
-    } catch (e: any) {
-      console.error("Google Sign-In Error: ", e);
+    } catch (e) {
+      console.log("🚀 ~ signIn ~ e:", e);
       setError(e as string);
       logger.log(e);
     }
