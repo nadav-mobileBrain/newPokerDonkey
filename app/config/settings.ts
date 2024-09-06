@@ -1,6 +1,6 @@
-import Constants from "expo-constants";
+// import Constants from "expo-constants";
 
-const homeIp = "10.0.0.6";
+const homeIp = "10.0.0.2";
 const workIp = "192.168.1.12";
 const meirIp = "192.168.1.152";
 

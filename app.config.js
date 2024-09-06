@@ -3,7 +3,7 @@ export default {
     name: "Poker Donkey",
     slug: "newPokerDonkey",
     scheme: "newpokerdonkey",
-    version: "1.0.1",
+    version: "1.0.3",
     orientation: "portrait",
     icon: "./app/assets/appLogo.png",
     userInterfaceStyle: "light",
@@ -21,6 +21,7 @@ export default {
         "react-native-google-mobile-ads",
         {
           androidAppId: "ca-app-pub-4169403957560964~6914057081",
+          iosAppId: "ca-app-pub-4169403957560964~5798113087",
         },
       ],
     ],

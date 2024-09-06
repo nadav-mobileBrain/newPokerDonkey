@@ -16,8 +16,7 @@ interface UserInfo {
 }
 
 const login = (userInfo: UserInfo): Promise<any> => {
-  console.log("🚀 ~ login ~ userInfo:", userInfo);
-  client.headers["Content-Type"] = "application/json";
+  // client.headers["Content-Type"] = "application/json";
   return client.post("api/users/login", userInfo);
 };
 
