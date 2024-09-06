@@ -38,10 +38,11 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
   const [isAdLoading, setIsAdLoading] = useState(true);
 
   const ANDROID_AD_UNIT_ID = "ca-app-pub-4169403957560964/7903733375";
+  const IOS_AD_UNIT_ID = "ca-app-pub-4169403957560964~5798113087";
   let adUnitId =
     Platform.select({
       android: ANDROID_AD_UNIT_ID,
-      // ios: "ca-app-pub-2640391750032066/9067118729",
+      ios: IOS_AD_UNIT_ID,
     }) || null;
 
   const { isLoaded, isClosed, load, show } = useInterstitialAd(

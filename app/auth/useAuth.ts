@@ -31,9 +31,13 @@ const useAuth = () => {
   };
 
   const logIn = (authToken: any) => {
-    const user = jwtDecode<any>(authToken.token);
-    setUser(user);
-    authStorage.storeToken(authToken.token);
+    try {
+      const user = jwtDecode<any>(authToken.token);
+      setUser(user);
+      authStorage.storeToken(authToken.token);
+    } catch (error) {
+      console.error("Error decoding the token", error);
+    }
   };
 
   const logOut = async () => {

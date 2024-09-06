@@ -22,7 +22,6 @@ const getToken = async (): Promise<any | null> => {
 
 const getUser = async () => {
   const token = await getToken();
-  console.log("🚀 ~ getUser ~ token:", token);
   return token ? jwtDecode(token) : null;
 };
 
