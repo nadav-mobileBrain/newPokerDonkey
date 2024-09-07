@@ -63,23 +63,7 @@ const RegisterScreen = () => {
       auth.logIn(authToken as any);
     } catch (e) {
       console.log("🚀 ~ signIn ~ e:", e);
-      if (isErrorWithCode(e)) {
-        switch (e.code) {
-          case statusCodes.SIGN_IN_REQUIRED:
-            setError("Please sign in to your Google account on your device.");
-            break;
-          case statusCodes.SIGN_IN_CANCELLED:
-            setError("Sign in was cancelled");
-            break;
-          case statusCodes.IN_PROGRESS:
-            setError("Sign in is already in progress");
-            break;
-          default:
-            setError("An unexpected error occurred");
-        }
-      } else {
-        setError("An unexpected error occurred");
-      }
+      setError("An unexpected error occurred");
       logger.log(e);
     }
   };
