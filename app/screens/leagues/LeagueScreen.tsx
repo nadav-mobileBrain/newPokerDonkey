@@ -36,8 +36,6 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
   const [selectedLeagues, setSelectedLeagues] = useState(null);
   const { user } = useAuth();
   const [isAdLoading, setIsAdLoading] = useState(true);
-  console.log("🚀 ~ LeagueScreen ~ isAdLoading:", isAdLoading);
-  console.log("dfdfdfd", getLeaguesApi.loading);
 
   const ANDROID_AD_UNIT_ID = "ca-app-pub-4169403957560964/7903733375";
   let adUnitId =
@@ -114,12 +112,12 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
     }
   };
 
-  const isLoading = getLeaguesApi.loading || isAdLoading;
-  //const isLoading = isAdLoading ?? false;
+  // const isLoading = getLeaguesApi.loading || isAdLoading;
+  // //const isLoading = isAdLoading ?? false;
 
   return (
     <>
-      <ActivityIndicator visible={isLoading} />
+      <ActivityIndicator visible={isAdLoading} />
       <Screen style={styles.screen}>
         <ImageBackground
           style={styles.background}
