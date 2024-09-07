@@ -113,11 +113,11 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
   };
 
   // const isLoading = getLeaguesApi.loading || isAdLoading;
-  // //const isLoading = isAdLoading ?? false;
+  const isLoading = isAdLoading ?? false;
 
   return (
     <>
-      <ActivityIndicator visible={isAdLoading} />
+      <ActivityIndicator visible={isLoading} />
       <Screen style={styles.screen}>
         <ImageBackground
           style={styles.background}
