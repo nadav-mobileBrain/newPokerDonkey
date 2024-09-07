@@ -51,4 +51,10 @@ export default {
     },
     owner: "nadavg",
   },
+  updates: {
+    url: "https://u.expo.dev/d1c31053-2dec-4269-a289-a4fa2410ac0b",
+  },
+  runtimeVersion: {
+    policy: "appVersion",
+  },
 };
