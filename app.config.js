@@ -3,7 +3,7 @@ export default {
     name: "Poker Donkey",
     slug: "newPokerDonkey",
     scheme: "newpokerdonkey",
-    version: "1.0.4",
+    version: "1.0.5",
     orientation: "portrait",
     icon: "./app/assets/appLogo.png",
     userInterfaceStyle: "light",
