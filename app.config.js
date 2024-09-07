@@ -1,5 +1,3 @@
-import { version } from "react";
-
 export default {
   expo: {
     name: "Poker Donkey",
