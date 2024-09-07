@@ -37,7 +37,7 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
   const { user } = useAuth();
   const [isAdLoading, setIsAdLoading] = useState(true);
 
-  const ANDROID_AD_UNIT_ID = "ca-app-pub-4169403957560964/7903733375";
+  const ANDROID_AD_UNIT_ID = "ca-app-pub-4169403957560964/9216815044";
   let adUnitId =
     Platform.select({
       android: ANDROID_AD_UNIT_ID,
@@ -96,10 +96,6 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
   const handleCardPress = (item: any, leagues: any) => {
     setSelectedItem(item);
     setSelectedLeagues(leagues);
-    navigation.navigate(routes.LEAGUE_DETAILS, {
-      item,
-      data: leagues,
-    });
 
     if (isLoaded) {
       show();
@@ -112,8 +108,8 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
     }
   };
 
-  // const isLoading = getLeaguesApi.loading || isAdLoading;
-  const isLoading = isAdLoading ?? false;
+  const isLoading = getLeaguesApi.loading || isAdLoading;
+  // const isLoading = isAdLoading ?? false;
 
   return (
     <>
