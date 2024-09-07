@@ -22,7 +22,7 @@ const CardStatsScreen = ({ route }: { route: any }) => {
   const apiRoute = data.apiRoute;
   const getStats = useApi(statsApi.getStatsForCard);
 
-  const ANDROID_AD_UNIT_ID = "ca-app-pub-4169403957560964/7903733375";
+  const ANDROID_AD_UNIT_ID = "ca-app-pub-4169403957560964/9216815044";
   //   const IOS_AD_UNIT_ID = "ca-app-pub-2640391750032066/5726635947";
 
   const adUnitId =

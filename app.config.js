@@ -1,3 +1,5 @@
+import { version } from "react";
+
 export default {
   expo: {
     name: "Poker Donkey",
@@ -30,6 +32,7 @@ export default {
       bundleIdentifier: "com.nadavg.newpokerdonkey",
     },
     android: {
+      versionCode: 2,
       adaptiveIcon: {
         foregroundImage: "./app/assets/appLogo.png",
         backgroundColor: "#ffffff",
