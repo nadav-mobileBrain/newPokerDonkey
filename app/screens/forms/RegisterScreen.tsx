@@ -26,13 +26,10 @@ const RegisterScreen = () => {
   const [error, setError] = useState<string | null>(null);
   const [userInfo, setUserInfo] = useState<any | null>(null);
 
-  const localWebClient =
-    "642539761997-uu7qdgioieccn89baa9v8tkhc84r0nbu.apps.googleusercontent.com";
-  const googleWebClientId =
-    "642539761997-mjob5qps6oodjiq52uj7noa805seisde.apps.googleusercontent.com";
   const configureGoogleSignin = async () => {
     GoogleSignin.configure({
-      webClientId: googleWebClientId || localWebClient,
+      webClientId:
+        "642539761997-uu7qdgioieccn89baa9v8tkhc84r0nbu.apps.googleusercontent.com",
     });
   };
   useEffect(() => {
@@ -43,7 +40,6 @@ const RegisterScreen = () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log("🚀 ~ signIn ~ userInfo:", userInfo);
       setUserInfo(userInfo);
       setError(null);
 
