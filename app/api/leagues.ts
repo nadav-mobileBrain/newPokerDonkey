@@ -11,39 +11,37 @@ const getLeagues = (userId: string) => {
   return client.get(`${endpoint}/myLeagues/${userId}`);
 };
 
-const createLeague = (leagueData: any) => {
+interface LeagueData {
+  image?: string;
+  leagueName: string;
+  userId: number;
+}
+
+const createLeague = (leagueData: LeagueData) => {
   const data = new FormData();
   data.append("leagueName", leagueData.leagueName);
-  data.append("userId", leagueData.userId);
+  data.append("userId", leagueData.userId.toString());
   if (!leagueData.image) {
     client.headers["Content-Type"] = "multipart/form-data";
-
     return client.post(`${endpoint}/createLeague`, data);
   }
-  const imageBlob = new Blob([leagueData.image], { type: "image/jpeg" });
-  data.append(
-    "image",
-    imageBlob,
-    leagueData.leagueName + getFileExtension(leagueData.image) /// Add the extension to the file name
+  const imageUri =
+    Platform.OS === "android"
+      ? leagueData.image
+      : leagueData.image.replace("file://", "");
+  const imageName = imageUri.split("/").pop() || `${leagueData.leagueName}.jpg`;
+  data.append("image", {
+    uri: imageUri,
+    type: "image/jpeg",
+    name: imageName,
+  } as any);
 
-    // uri:
-    //   Platform.OS === 'android'
-    //     ? leagueData.image
-    //     : leagueData.image.replace('file://', ''),
-  );
-  client.headers["Content-Type"] = "multipart/form-data";
-
-  return client.post(`${endpoint}/createLeague`, data);
+  return client.post(`${endpoint}/createLeague`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
-
-const joinLeague = (leagueData: any) => {
-  const leagueNUmber = leagueData.leagueNumber;
-  const userId = leagueData.userId;
-  return client.put(`${endpoint}/joinLeague/${leagueNUmber}/${userId}`);
-};
-
-const getLeaguePlayers = (leagueId: string) =>
-  client.get(`${endpoint}/getLeaguePlayersByLeagueId/${leagueId}`);
 
 interface LeaguePlayer {
   id: string;
@@ -69,11 +67,7 @@ const updateLeagueDetails = async (leagueInfo: LeagueInfo) => {
   data.append("leagueId", leagueInfo.leagueId.toString());
   data.append("leaguePlayers", JSON.stringify(leagueInfo.leaguePlayers));
 
-  if (
-    leagueInfo.image &&
-    leagueInfo.image !==
-      "https://backend-donk-images.s3.il-central-1.amazonaws.com/leagueAvatars/league.jpg"
-  ) {
+  if (leagueInfo.image && leagueInfo.image !== "leagueAvatars/league.jpg") {
     const imageUri =
       Platform.OS === "android"
         ? leagueInfo.image
@@ -98,6 +92,15 @@ const updateLeagueDetails = async (leagueInfo: LeagueInfo) => {
 const deleteLeague = (leagueId: string) => {
   return client.delete(`${endpoint}/deleteLeague/${leagueId}`);
 };
+
+const joinLeague = (leagueData: any) => {
+  const leagueNUmber = leagueData.leagueNumber;
+  const userId = leagueData.userId;
+  return client.put(`${endpoint}/joinLeague/${leagueNUmber}/${userId}`);
+};
+
+const getLeaguePlayers = (leagueId: string) =>
+  client.get(`${endpoint}/getLeaguePlayersByLeagueId/${leagueId}`);
 
 export default {
   getLeagues,

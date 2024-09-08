@@ -21,20 +21,27 @@ const validationSchema = Yup.object().shape({
   image: Yup.string().label("Image"),
 });
 
+interface LeagueInfo {
+  image: string | null;
+  leagueName: string;
+  userId: number | null;
+}
 const CreateLeagueScreen = ({ navigation }: { navigation: any }) => {
   const [error, setError] = useState<String>("");
   const [imageUri, setImageUri] = useState<string | null>(null); // New state for image URI
   const { user } = useAuth();
   const createLeagueApi = useApi(leaguesApi.createLeague);
 
-  const handleSubmit = async (leagueInfo: any) => {
+  const handleSubmit = async (leagueInfo: LeagueInfo) => {
     const completeLeagueInfo = {
       ...leagueInfo,
       image: imageUri,
       userId: user?.userId,
     };
 
-    const result = await createLeagueApi.request(completeLeagueInfo);
+    const result = await createLeagueApi.request(
+      completeLeagueInfo as LeagueInfo
+    );
     if (!result.ok) {
       if (result.data) setError((result.data as any).error);
       else {
@@ -62,7 +69,7 @@ const CreateLeagueScreen = ({ navigation }: { navigation: any }) => {
           <AppLogo />
           <HeaderText style={{ color: colors.light }}>Create League</HeaderText>
           <AppForm
-            initialValues={{ leagueName: "" }}
+            initialValues={{ leagueName: "", image: "", userId: null }}
             onSubmit={handleSubmit}
             validationSchema={validationSchema}>
             <ErrorMessage error={error} visible={error} />
