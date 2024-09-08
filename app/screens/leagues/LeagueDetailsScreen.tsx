@@ -44,7 +44,6 @@ const LeagueDetailsScreen = ({
   const insets = useSafeAreaInsets();
   const { trackEvent } = useAptabase();
 
-  // console.log(`${config.s3.baseUrl}${league.league_image}`);
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);

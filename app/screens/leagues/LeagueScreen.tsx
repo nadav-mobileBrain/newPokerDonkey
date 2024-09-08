@@ -37,10 +37,11 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
   const { user } = useAuth();
   const [isAdLoading, setIsAdLoading] = useState(true);
 
-  const ANDROID_AD_UNIT_ID = "ca-app-pub-4169403957560964/9216815044";
+  const ANDROID_INTERSTITIAL_AD_UNIT_ID: string =
+    "ca-app-pub-4169403957560964/9216815044";
   let adUnitId =
     Platform.select({
-      android: ANDROID_AD_UNIT_ID,
+      android: ANDROID_INTERSTITIAL_AD_UNIT_ID,
       // ios: "ca-app-pub-2640391750032066/9067118729",
     }) || null;
 
@@ -86,7 +87,6 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
 
   const fetchLeagues = async () => {
     const userLeagues = await getLeaguesApi.request(user?.userId);
-    console.log("🚀 ~ fetchLeagues ~ userLeagues:", userLeagues);
     if (!userLeagues.ok) {
       return;
     }
@@ -122,7 +122,6 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
           <View style={styles.overlay} />
           <PlayerAvatar />
           <AppLogo />
-
           <HowToPlay navigation={navigation} />
           <HeaderText style={styles.headerText}>My Leagues</HeaderText>
           {getLeaguesApi.error && (

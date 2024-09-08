@@ -67,7 +67,9 @@ const PlayerStatsCard: React.FC<PlayerStatsCardProps> = ({ league }) => {
 
       {noGames && (
         <>
-          <HeaderText>No games played yet</HeaderText>
+          <HeaderText style={{ color: colors.gold }}>
+            No games played yet
+          </HeaderText>
           <AppText style={{ color: colors.gold }}>
             Go to league screen to start a new game
           </AppText>

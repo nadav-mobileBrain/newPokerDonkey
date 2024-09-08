@@ -95,7 +95,9 @@ const EditProfileScreen = ({ navigation }: any) => {
       <Screen style={styles.container}>
         <LinearGradient
           colors={colors.primaryGradientArray}
-          style={styles.background}>
+          style={styles.background}
+          accessible={true}
+          accessibilityLabel="Edit profile screen background">
           <AppForm
             initialValues={{ nickName: user?.nickName }}
             onSubmit={handleSubmit}

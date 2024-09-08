@@ -13,7 +13,12 @@ const AppText: React.FC<AppTextProps> = ({
   ...otherProps
 }) => {
   return (
-    <Text style={[defaultStyles.text, style]} {...otherProps}>
+    <Text
+      style={[defaultStyles.text, style]}
+      {...otherProps}
+      accessibilityLabel="AppText" // Add accessibilityLabel
+      accessibilityHint="Text component for the app" // Add accessibilityHint
+    >
       {children}
     </Text>
   );

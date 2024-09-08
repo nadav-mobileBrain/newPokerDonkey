@@ -43,7 +43,7 @@ const menuItems = [
   },
 ];
 
-const AccountScreen = ({ navigation }: { navigation: any }) => {
+const AccountScreen = ({ navigation }: any) => {
   const { user, logOut } = useAuth();
   const { trackEvent } = useAptabase();
 
@@ -56,7 +56,6 @@ const AccountScreen = ({ navigation }: { navigation: any }) => {
 
   const handleLogout = async () => {
     configureGoogleSignin();
-    // GoogleSignin.revokeAccess();
     await GoogleSignin.signOut();
     logOut();
   };
@@ -67,7 +66,7 @@ const AccountScreen = ({ navigation }: { navigation: any }) => {
       <Screen style={styles.screen}>
         <ToastContainer style={{ width: "100%", top: 20 }} position="top" />
         <LinearGradient
-          colors={colors.secondaryGradientArray}
+          colors={colors.primaryGradientArray}
           style={styles.background}>
           <View style={styles.container}>
             <PlayerDetails
@@ -79,6 +78,9 @@ const AccountScreen = ({ navigation }: { navigation: any }) => {
                   : `${config.s3.baseUrl}${user?.image}`,
               }}
               onPress={() => {
+                trackEvent("go to personal stats from account screen", {
+                  userId: user?.userId,
+                });
                 navigation.navigate(routes.PERSONAL_STATS);
               }}
             />

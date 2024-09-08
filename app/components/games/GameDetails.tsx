@@ -43,7 +43,7 @@ const GameDetails = ({
       <AppText style={styles.gameDate}>
         Started At: {dayjs(game.created_at).format("DD/MM/YYYY hh:mm:ss")}
       </AppText>
-      <View style={styles.totalContainer}>
+      <View>
         <View style={styles.totalContainer}>
           <AppText style={styles.totalText}>Total buy ins</AppText>
           <AppText style={styles.totalText}>{totalBuyIn}</AppText>
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "50%",
   },
+
   totalText: {
     fontSize: 12,
     fontWeight: "bold",

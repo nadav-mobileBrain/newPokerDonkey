@@ -64,7 +64,7 @@ const WelcomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       <ImageBackground
         style={styles.background}
         source={require("../assets/appLogo.webp")}
-        blurRadius={7}>
+        blurRadius={3}>
         <View style={styles.overlay} />
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.logoContainer}>
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.dark,
-    opacity: 0.5,
+    opacity: 0.75,
   },
   tAndC: {
     color: colors.light,

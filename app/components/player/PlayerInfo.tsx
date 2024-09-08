@@ -42,7 +42,9 @@ const PlayerInfo = ({
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => onPress(item)}
-            style={styles.playerContainer}>
+            style={styles.playerContainer}
+            accessibilityLabel="Player Avatar"
+            accessibilityHint="Tap to view player stats">
             <Image
               style={[
                 styles.image,
