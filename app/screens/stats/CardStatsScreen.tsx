@@ -26,6 +26,8 @@ const CardStatsScreen = ({ route }: { route: any }) => {
   //   const IOS_AD_UNIT_ID = "ca-app-pub-2640391750032066/5726635947";
 
   console.log("adunit", ANDROID_AD_UNIT_ID);
+  console.log("adunit", ANDROID_AD_UNIT_ID);
+  console.log("adunit", ANDROID_AD_UNIT_ID);
   const adUnitId =
     Platform.select({
       // ios: IOS_AD_UNIT_ID,
