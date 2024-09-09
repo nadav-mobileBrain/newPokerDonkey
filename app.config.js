@@ -3,7 +3,7 @@ export default {
     name: "Poker Donkey",
     slug: "newPokerDonkey",
     scheme: "newpokerdonkey",
-    version: "1.0.63",
+    version: "1.0.64",
     orientation: "portrait",
     icon: "./app/assets/appLogo.png",
     userInterfaceStyle: "light",
@@ -30,11 +30,12 @@ export default {
       bundleIdentifier: "com.nadavg.newpokerdonkey",
     },
     android: {
-      versionCode: 5,
+      versionCode: 6,
       adaptiveIcon: {
         foregroundImage: "./app/assets/appLogo.png",
         backgroundColor: "#ffffff",
       },
+      permissions: ["com.google.android.gms.persmission.AD_ID"],
 
       package: "com.nadavg.newpokerdonkey",
       googleServicesFile: process.env.GOOGLE_SERVICES_JSON,
