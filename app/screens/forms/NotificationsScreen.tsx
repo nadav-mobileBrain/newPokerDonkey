@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 16,
     justifyContent: "center",
+    height: 50,
   },
   label: {
     fontSize: 18,

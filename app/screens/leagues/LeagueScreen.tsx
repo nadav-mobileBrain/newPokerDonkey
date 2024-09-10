@@ -38,7 +38,7 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
   const [isAdLoading, setIsAdLoading] = useState(true);
 
   const ANDROID_INTERSTITIAL_AD_UNIT_ID: string =
-    "ca-app-pub-4169403957560964/9216815044";
+    "ca-app-pub-4169403957560964/4331129928";
   let adUnitId =
     Platform.select({
       android: ANDROID_INTERSTITIAL_AD_UNIT_ID,
@@ -108,12 +108,11 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
     }
   };
 
-  const isLoading = getLeaguesApi.loading || isAdLoading;
+  //const isLoading = getLeaguesApi.loading || isAdLoading;
   // const isLoading = isAdLoading ?? false;
-
   return (
     <>
-      <ActivityIndicator visible={isLoading} />
+      <ActivityIndicator visible={getLeaguesApi.loading} />
       <Screen style={styles.screen}>
         <ImageBackground
           style={styles.background}
@@ -182,7 +181,7 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.dark,
-    opacity: 0.45,
+    opacity: 0.5,
   },
 
   headerText: {

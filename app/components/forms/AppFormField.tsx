@@ -41,6 +41,7 @@ function AppFormField({
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row-reverse",
+    height: 50,
   },
 });
 

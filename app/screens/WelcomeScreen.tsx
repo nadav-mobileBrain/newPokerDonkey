@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   developerText: {
     color: colors.gold,
     textAlign: "center",
-    marginTop: 10,
+    marginTop: 14,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,

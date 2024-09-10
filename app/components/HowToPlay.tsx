@@ -20,7 +20,12 @@ const HowToPlay: React.FC<HowToPlayProps> = ({
       <AppText
         style={[
           styles.helpLink,
-          { color: colors[textColor], textAlign: align },
+          {
+            color: Array.isArray(colors[textColor])
+              ? colors[textColor].join("")
+              : colors[textColor],
+            textAlign: align,
+          },
         ]}>
         How To Play?
       </AppText>
@@ -31,7 +36,7 @@ const HowToPlay: React.FC<HowToPlayProps> = ({
 const styles = {
   helpLink: {
     color: colors.secondary,
-    fontSize: 16,
+    fontSize: 20,
     // fontWeight: "700",
     textAlign: "center" as TextStyle["textAlign"], // Ensuring the textAlign is of type TextStyle['textAlign']
     textDecorationLine: "underline" as TextStyle["textDecorationLine"],
