@@ -11,6 +11,7 @@ import AppText from "../components/AppText";
 import AppLogo from "../components/AppLogo";
 import colors from "../config/colors";
 import Screen from "../components/Screen";
+import Icon from "../components/Icon";
 
 const FeatureItem = ({
   icon,
@@ -41,18 +42,22 @@ const HowToPlayScreen = () => {
         <ScrollView>
           <AppLogo />
           <AppText style={styles.title}>How to Use Poker Donkey</AppText>
-          <AppText
-            style={{
-              color: colors.gold,
-              fontSize: 14,
-              textDecorationLine: "underline",
-              textAlign: "center",
-            }}
-            onPress={() =>
-              Linking.openURL("https://www.youtube.com/@pokerdonkey/shorts")
-            }>
-            See video tutorials on my youtube channel
-          </AppText>
+          <View style={styles.youtubeLink}>
+            <Icon name="youtube" size={24} backgroundColor={colors.danger} />
+            <AppText
+              style={{
+                color: colors.gold,
+                fontSize: 16,
+                textDecorationLine: "underline",
+                marginLeft: 10,
+              }}
+              onPress={() =>
+                Linking.openURL("https://www.youtube.com/@pokerdonkey/shorts")
+              }>
+              See video tutorials on my youtube channel
+            </AppText>
+          </View>
+
           <AppText style={styles.subtitle}>Getting Started</AppText>
           <FeatureItem
             icon="account-plus"
@@ -186,7 +191,14 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.dark,
-    opacity: 0.8,
+    opacity: 0.9,
+  },
+  youtubeLink: {
+    ///align the text and icon
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10,
   },
 });
 

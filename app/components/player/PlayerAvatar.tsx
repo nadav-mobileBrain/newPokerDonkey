@@ -26,7 +26,7 @@ const PlayerAvatar = () => {
         trackEvent("Player Avatar Clicked", { userId: user?.userId });
         navigation.navigate(routes.PERSONAL_STATS as never);
       }}
-      accessibilityLabel="Player Avatar"
+      accessibilityLabel="Player Personal Stats"
       accessibilityHint="Tap to view your personal stats">
       <View style={styles.avatarContainer}>
         <Image style={styles.image} source={{ uri: url }} />

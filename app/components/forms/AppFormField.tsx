@@ -30,7 +30,7 @@ function AppFormField({
         onChangeText={handleChange(name)}
         width={width}
         value={values[name]}
-        accessibilityLabel={name}
+        accessibilityLabel={`Input field for ${name}`}
         accessibilityHint="Enter text"
       />
       <ErrorMessage error={errors[name]} visible={touched[name]} />

@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   tAndC: {
     color: colors.light,
-    fontSize: 12,
+    fontSize: 15,
     textAlign: "center",
     marginTop: 5,
     textDecorationLine: "underline",

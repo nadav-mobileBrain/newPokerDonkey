@@ -141,7 +141,7 @@ const PersonalStatsScreen = ({ route }: { route: any }) => {
   return (
     <>
       <ActivityIndicator visible={getPersonalStatsApi.loading} />
-      <Screen style={styles.screen}>
+      <Screen>
         <ImageBackground
           source={require("../../assets/personalDonkey.webp")}
           style={styles.background}
@@ -190,17 +190,15 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
   },
-  screen: {
-    flex: 1,
-  },
+
   imageContainer: {
-    width: 60,
-    height: 60,
+    width: 40,
+    height: 40,
     alignSelf: "center",
-    borderRadius: 30,
+    borderRadius: 20,
     overflow: "hidden",
     borderWidth: 2,
-    marginTop: 10,
+    // marginTop: 10,
   },
   image: {
     width: "100%",
@@ -210,7 +208,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textDecorationLine: "underline",
     color: colors.secondary,
-    fontSize: 15,
+    fontSize: 12,
     fontWeight: "bold",
     marginVertical: 5,
   },
@@ -232,13 +230,13 @@ const styles = StyleSheet.create({
   },
   statTitle: {
     color: colors.gold,
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "bold",
     textDecorationLine: "underline",
   },
   statValue: {
     color: colors.white,
-    fontSize: 14,
+    fontSize: 12,
   },
 
   overlay: {

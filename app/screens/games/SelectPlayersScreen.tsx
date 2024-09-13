@@ -109,7 +109,7 @@ const SelectPlayersScreen = ({
       <Container position="top" style={{ width: "100%" }} />
       <View style={styles.selectContainer}>
         <HeaderText style={styles.title}> Select Players </HeaderText>
-        <HowToPlay navigation={navigation} textColor="blue" />
+        <HowToPlay navigation={navigation} />
         {error && <AppText>{error}</AppText>}
         {unselectedPlayers.length > 0 && (
           <AppText style={styles.addRemove}>

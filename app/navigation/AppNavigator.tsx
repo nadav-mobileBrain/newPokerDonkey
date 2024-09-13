@@ -14,7 +14,7 @@ const AppNavigator = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="MyLeagues"
+        name="My Leagues"
         component={FeedNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (

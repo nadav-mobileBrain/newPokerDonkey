@@ -43,7 +43,7 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
     Platform.select({
       android: ANDROID_INTERSTITIAL_AD_UNIT_ID,
       // ios: "ca-app-pub-2640391750032066/9067118729",
-    }) || null;
+    }) || ANDROID_INTERSTITIAL_AD_UNIT_ID;
 
   const { isLoaded, isClosed, load, show } = useInterstitialAd(
     __DEV__ ? TestIds.INTERSTITIAL : adUnitId,
@@ -131,6 +131,7 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
               <AppButton title="Retry" onPress={getLeaguesApi.request} />
             </>
           )}
+
           {leagues?.leagues?.length === 0 && (
             <NoLeagues navigation={navigation} />
           )}
@@ -138,6 +139,12 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
           {leagues?.leagues?.length > 0 && (
             <CreatejoinLeagues navigation={navigation} />
           )}
+          <AppButton
+            title="Global Leaderboard"
+            icon="trophy"
+            color="gold"
+            onPress={() => navigation.navigate("GlobalLeaderBoard")}
+          />
 
           {leagues?.leagues?.length > 0 && (
             <FlatList
@@ -181,7 +188,7 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.dark,
-    opacity: 0.5,
+    opacity: 0.7,
   },
 
   headerText: {

@@ -14,9 +14,13 @@ const getMainCardsStats = (leagueId: string) =>
 const getStatsForCard = (cardName: string, leagueId: string) =>
   client.get(`${endpoint}/${cardName}/${leagueId}`);
 
+const getGlobalLeaderBoard = () =>
+  client.get(`${endpoint}/getGlobalLeaderBoard`);
+
 export default {
   getLeagueStats,
   getPlayerStats,
   getMainCardsStats,
   getStatsForCard,
+  getGlobalLeaderBoard,
 };

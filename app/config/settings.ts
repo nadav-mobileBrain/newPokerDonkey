@@ -6,7 +6,7 @@ const meirIp = "192.168.1.152";
 
 const settings = {
   dev: {
-    baseURL: `http://${workIp}:3030/`,
+    baseURL: `http://${homeIp}:3030/`,
   },
   production: {
     baseURL: `https://backend-donk-ae6a3b674658.herokuapp.com/`,

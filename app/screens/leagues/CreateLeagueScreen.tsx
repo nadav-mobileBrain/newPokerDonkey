@@ -62,12 +62,12 @@ const CreateLeagueScreen = ({ navigation }: { navigation: any }) => {
       <ActivityIndicator visible={createLeagueApi.loading} />
       <Screen style={styles.screen}>
         <ImageBackground
-          blurRadius={4}
+          blurRadius={3}
           style={styles.background}
           source={require("../../assets/newLogo.webp")}>
           <View style={styles.overlay} />
           <AppLogo />
-          <HeaderText style={{ color: colors.light }}>Create League</HeaderText>
+          <HeaderText style={{ color: colors.gold }}>Create League</HeaderText>
           <AppForm
             initialValues={{ leagueName: "", image: "", userId: null }}
             onSubmit={handleSubmit}
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.dark,
-    opacity: 0.5,
+    opacity: 0.8,
   },
 });
 

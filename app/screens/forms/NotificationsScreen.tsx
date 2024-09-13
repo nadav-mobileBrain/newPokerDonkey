@@ -91,6 +91,7 @@ const NotificationsScreen = (props: any) => {
           title="Save Selection"
           color="gold"
           onPress={() => updateNotificationSettings()}
+          icon="content-save"
         />
       </View>
     </Screen>

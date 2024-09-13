@@ -50,6 +50,7 @@ const MainStatsScreen = ({ route }: { route: any }) => {
           <AppButton
             title="All Games"
             color="gold"
+            icon="calendar"
             onPress={() => {
               trackEvent("All Games Button Pressed", { league: league.name });
               navigation.navigate(routes.ALL_GAMES, { league });

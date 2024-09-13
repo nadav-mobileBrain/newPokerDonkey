@@ -30,7 +30,7 @@ const CardStatsScreen = ({ route }: { route: any }) => {
     Platform.select({
       // ios: IOS_AD_UNIT_ID,
       android: ANDROID_BANNER_AD_UNIT_ID,
-    }) || "";
+    }) || ANDROID_BANNER_AD_UNIT_ID;
 
   useEffect(() => {
     getStatsForCard();
@@ -42,12 +42,22 @@ const CardStatsScreen = ({ route }: { route: any }) => {
     setRefreshing(false);
   };
 
+  interface Leader {
+    id: number;
+    image: string;
+    nickName: string;
+    title: string;
+    subTitle: string;
+    subTitle2: string;
+  }
+
   const getStatsForCard = async () => {
     setLoading(true);
     const result = await getStats.request(apiRoute, leagueId);
     if (!result.ok) return;
     ///get the first element of the array
-    const leader = (result.data as any)[0];
+    const leader = (result?.data as Leader[])[0];
+
     setLeader(leader);
     (result.data as any).shift();
 
@@ -58,7 +68,7 @@ const CardStatsScreen = ({ route }: { route: any }) => {
   return (
     <Screen style={styles.screen}>
       <ActivityIndicator visible={loading} />
-      <LeaderStatsHeader leader={leader} titles={data} />
+      <LeaderStatsHeader leader={leader as Leader} titles={data} />
       <PlayersList players={cardPlayers} titles={data} />
       <View style={styles.bannerContainer}>
         <BannerAd

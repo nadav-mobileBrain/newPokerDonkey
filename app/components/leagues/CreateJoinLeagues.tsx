@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   text: {
-    fontSize: 12,
+    fontSize: 13,
     fontFamily: "Roboto_700Bold",
     color: colors.light,
   },

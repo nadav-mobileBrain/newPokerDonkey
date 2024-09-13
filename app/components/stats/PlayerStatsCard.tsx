@@ -35,9 +35,19 @@ interface PlayerStatsCardProps {
   };
 }
 
+//define type of cardsData as an array of objects
+type CardData = {
+  apiRoute: string;
+  cardTitle: string;
+  id: number;
+  subTitle: string;
+  subTitle2: string;
+  title: string;
+  values: { [key: string]: any };
+};
 const PlayerStatsCard: React.FC<PlayerStatsCardProps> = ({ league }) => {
   const getCardsInfo = useApi(statsApi.getMainCardsStats);
-  const [cardsData, setCardsData] = useState<any[]>([]); // Assuming cardsData is an array
+  const [cardsData, setCardsData] = useState<CardData[]>([]); // Assuming cardsData is an array
   const [loading, setLoading] = useState(false);
   const [noGames, setNoGames] = useState(false);
   const navigation = useNavigation<PlayerStatsCardNavigationProp>();

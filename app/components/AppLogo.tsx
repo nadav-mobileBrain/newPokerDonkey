@@ -6,10 +6,7 @@ import defaultStyles from "../config/styles";
 const AppLogo = () => {
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={require("../assets/newLogoV2.webp")}
-      />
+      <Image style={styles.image} source={require("../assets/appLogo.webp")} />
       <AppText style={[defaultStyles.text, styles.title]}>Poker Donkey</AppText>
     </View>
   );

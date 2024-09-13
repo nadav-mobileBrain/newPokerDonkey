@@ -89,7 +89,7 @@ const LeagueDetailsScreen = ({
             Edit league details
           </AppText>
         )}
-        <HowToPlay navigation={navigation} textColor="blue" align="center" />
+        <HowToPlay navigation={navigation} align="center" />
       </View>
 
       <PlayerInfo leaguePlayers={leaguePlayers} width={35} height={35} />

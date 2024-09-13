@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.dark,
-    opacity: 0.5,
+    opacity: 0.8,
   },
   remark: {
     color: colors.gold,

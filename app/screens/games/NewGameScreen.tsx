@@ -231,6 +231,7 @@ const NewGameScreen = ({
                 title="End Game"
                 color="gold"
                 onPress={() => moneyLeftInBank()}
+                icon="cards-playing-club-multiple-outline"
               />
               <Modal visible={modalVisible} animationType="slide">
                 <Button title="Cancel" onPress={() => setModalVisible(false)} />
