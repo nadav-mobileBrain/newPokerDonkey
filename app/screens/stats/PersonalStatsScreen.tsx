@@ -145,7 +145,7 @@ const PersonalStatsScreen = ({ route }: { route: any }) => {
         <ImageBackground
           source={require("../../assets/personalDonkey.webp")}
           style={styles.background}
-          blurRadius={5}>
+          blurRadius={4}>
           <View style={styles.overlay} />
           <View style={styles.imageContainer}>
             <Image style={styles.image} source={{ uri: imageUrl }} />
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.dark,
-    opacity: 0.55,
+    opacity: 0.75,
   },
 });
 

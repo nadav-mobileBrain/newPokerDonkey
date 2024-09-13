@@ -40,7 +40,7 @@ const LeagueStatsCard = ({ league }: any) => {
           {league.league_name}
         </AppText>
         <AppText style={styles.number} numberOfLines={1}>
-          League Number: {league.league_number}
+          League No.: {league.league_number}
         </AppText>
       </View>
       <View style={styles.statsContainer}>
