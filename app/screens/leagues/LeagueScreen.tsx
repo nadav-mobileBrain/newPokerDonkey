@@ -26,8 +26,10 @@ import Screen from "../../components/Screen";
 import useApi from "../../hooks/useApi";
 import useAuth from "../../auth/useAuth";
 import HowToPlay from "../../components/HowToPlay";
+import { useAptabase } from "../../hooks/useAptabase";
 
 const LeagueScreen = ({ navigation }: { navigation: any }) => {
+  const { trackEvent } = useAptabase();
   const isFocused = useIsFocused();
   const [refreshing, setRefreshing] = useState(false);
   const getLeaguesApi = useApi(leaguesApi.getLeagues);
@@ -99,7 +101,10 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
 
     if (isLoaded) {
       show();
+      trackEvent("Interstitial Ad Loaded", { userId: user?.userId });
     } else {
+      trackEvent("Interstitial Ad not loaded", { userId: user?.userId });
+      trackEvent("League Card Pressed", { userId: user?.userId });
       navigation.navigate(routes.LEAGUE_DETAILS, {
         item,
         data: leagues,
@@ -143,7 +148,12 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
             title="Global Leaderboard"
             icon="trophy"
             color="gold"
-            onPress={() => navigation.navigate("GlobalLeaderBoard")}
+            onPress={() => {
+              trackEvent("Global Leaderboard Pressed", {
+                userId: user?.userId,
+              });
+              navigation.navigate("GlobalLeaderBoard");
+            }}
           />
 
           {leagues?.leagues?.length > 0 && (

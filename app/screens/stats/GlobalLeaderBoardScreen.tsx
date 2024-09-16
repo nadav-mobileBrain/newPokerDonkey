@@ -18,6 +18,7 @@ import useApi from "../../hooks/useApi";
 import statsApi from "../../api/stats";
 import colors from "../../config/colors";
 import HeaderText from "../../components/HeaderText";
+import AppText from "../../components/AppText";
 
 interface LeaderBoardItem {
   image: string;
@@ -110,6 +111,7 @@ const GlobalLeaderBoardScreen: React.FC = () => {
         <View style={styles.overlay} />
         <View style={styles.headerContainer}>
           <HeaderText style={styles.headerText}>Global Leaderboard</HeaderText>
+          <AppText style={{ color: colors.gold }}>Top 10 players</AppText>
         </View>
         {error && <Text style={styles.errorText}>{error}</Text>}
         <AnimatedFlatList

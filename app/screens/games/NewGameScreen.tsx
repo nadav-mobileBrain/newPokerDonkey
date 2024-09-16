@@ -296,7 +296,8 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    padding: 20,
+    // padding: 20,
+    paddingHorizontal: 20,
   },
   button: {
     color: colors.gold,
@@ -328,7 +329,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 15, // Added this line
     overflow: "hidden", // Ensure the FlatList items respect the border radius
     backgroundColor: colors.white, // Match the FlatList background to the container
-    maxHeight: 350, // Adjust the height as needed
+    maxHeight: 300, // Adjust the height as needed
     flexGrow: 0,
     marginBottom: 5,
   },
