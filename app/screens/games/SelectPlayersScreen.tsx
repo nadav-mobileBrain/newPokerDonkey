@@ -56,6 +56,7 @@ const SelectPlayersScreen = ({
       };
       checkIfOpenGames();
     }
+    trackEvent("Select Players Screen", { screen: "Select Players" });
   }, [isFocused]);
 
   const onSelectedPlayer = (player: any) => {

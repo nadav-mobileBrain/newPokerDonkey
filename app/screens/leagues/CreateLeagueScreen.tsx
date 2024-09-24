@@ -15,6 +15,7 @@ import Screen from "../../components/Screen";
 import useAuth from "../../auth/useAuth";
 import useApi from "../../hooks/useApi";
 import logger from "../../utility/logger";
+import { useAptabase } from "../../hooks/useAptabase";
 
 const validationSchema = Yup.object().shape({
   leagueName: Yup.string().min(2).required().label("League Name"),
@@ -31,8 +32,10 @@ const CreateLeagueScreen = ({ navigation }: { navigation: any }) => {
   const [imageUri, setImageUri] = useState<string | null>(null); // New state for image URI
   const { user } = useAuth();
   const createLeagueApi = useApi(leaguesApi.createLeague);
+  const { trackEvent } = useAptabase();
 
   const handleSubmit = async (leagueInfo: LeagueInfo) => {
+    trackEvent("Create League Screen", { screen: "Create League" });
     const completeLeagueInfo = {
       ...leagueInfo,
       image: imageUri,

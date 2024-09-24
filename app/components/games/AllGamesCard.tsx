@@ -1,5 +1,11 @@
-import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Animated,
+} from "react-native";
+import React, { useEffect, useRef } from "react";
 import { Toast } from "toastify-react-native";
 
 import AppText from "../AppText";
@@ -35,6 +41,26 @@ type AllGamesCardNavigationProp = StackNavigationProp<
 const AllGamesCard = ({ game }: any) => {
   const navigation = useNavigation<AllGamesCardNavigationProp>();
   const { user } = useAuth();
+
+  const flickerAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(flickerAnim, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+        Animated.timing(flickerAnim, {
+          toValue: 0,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+      ])
+    ).start();
+  }, [flickerAnim]);
+
   const editGame = () => {
     const userId = user?.userId;
     const gameAdmin = game.game_manager_id;
@@ -77,7 +103,24 @@ const AllGamesCard = ({ game }: any) => {
           {dayjs(game.updated_at).format("DD/MM/YYYY")}
         </AppText>
       )}
-      {game.isOpen && <AppText style={styles.isOpen}>Live Game</AppText>}
+      {game.isOpen && (
+        <Animated.Text
+          style={[
+            styles.isOpen,
+            {
+              textShadowRadius: flickerAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 10],
+              }),
+              textShadowColor: flickerAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [colors.green, colors.darkGreen],
+              }),
+            },
+          ]}>
+          Live Game
+        </Animated.Text>
+      )}
       <FlatList
         data={game.user_games}
         keyExtractor={(item) => item.user_id.toString()}
@@ -126,6 +169,7 @@ const styles = StyleSheet.create({
     width: "100%",
     textAlign: "center",
     padding: 5,
+    fontSize: 17,
     //flickering neon green
     color: colors.green,
     textShadowColor: colors.green,

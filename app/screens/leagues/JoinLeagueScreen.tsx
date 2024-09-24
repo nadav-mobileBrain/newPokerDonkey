@@ -15,6 +15,7 @@ import SubmitButton from "../../components/forms/SubmitButton";
 import useAuth from "../../auth/useAuth";
 import routes from "../../navigation/routes";
 import logger from "../../utility/logger";
+import { useAptabase } from "../../hooks/useAptabase";
 
 const validationSchema = Yup.object().shape({
   leagueNumber: Yup.string().required().min(4).max(5).label("League Number"),
@@ -23,8 +24,9 @@ const validationSchema = Yup.object().shape({
 const JoinLeagueScreen = ({ navigation }: { navigation: any }) => {
   const [error, setError] = useState<String>("");
   const { user } = useAuth();
-
+  const { trackEvent } = useAptabase();
   const handleSubmit = async ({ leagueNumber }: { leagueNumber: string }) => {
+    trackEvent("Join League Screen", { screen: "Join League" });
     const completeLeagueInfo = {
       leagueNumber,
       userId: user?.userId,

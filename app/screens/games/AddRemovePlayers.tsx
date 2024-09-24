@@ -11,8 +11,11 @@ import gameApi from "../../api/game";
 import useApi from "../../hooks/useApi";
 import routes from "../../navigation/routes";
 import logger from "../../utility/logger";
+import { useAptabase } from "../../hooks/useAptabase";
 
 const AddRemovePlayers = ({ route, navigation }: any) => {
+  const { trackEvent } = useAptabase();
+
   const leaguePlayers = route.params.leaguePlayersFromApi;
   const league = route.params.league;
 
@@ -42,6 +45,7 @@ const AddRemovePlayers = ({ route, navigation }: any) => {
       }
     };
     checkIfOpenGames();
+    trackEvent("Add Remove Players Screen", { screen: "Add Remove Players" });
   }, []);
 
   const continueGame = async () => {

@@ -11,6 +11,7 @@ import useApi from "../../hooks/useApi";
 import useAuth from "../../auth/useAuth";
 import colors from "../../config/colors";
 import logger from "../../utility/logger";
+import { useAptabase } from "../../hooks/useAptabase";
 
 import {
   GoogleSignin,
@@ -20,6 +21,8 @@ import {
 } from "@react-native-google-signin/google-signin";
 
 const RegisterScreen = () => {
+  const { trackEvent } = useAptabase();
+
   const signinWithGoogleApi = useApi(usersApi.googleSignin);
   const loginApi = useApi(authApi.login);
   const auth = useAuth();
@@ -34,6 +37,7 @@ const RegisterScreen = () => {
   };
   useEffect(() => {
     configureGoogleSignin();
+    trackEvent("Register Screen", { screen: "Register" });
   }, []);
 
   const signIn = async () => {

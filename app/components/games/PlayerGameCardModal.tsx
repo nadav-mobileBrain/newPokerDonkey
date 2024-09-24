@@ -14,7 +14,7 @@ import { removeLastBuyIn, addBuyIn } from "../../utils/gameUtils";
 import logger from "../../utility/logger";
 
 const validationSchema = Yup.object().shape({
-  cashOutAmount: Yup.number().required().label("Cash Out Amount"),
+  cashOutAmount: Yup.number().min(0).required().label("Cash Out Amount"),
 });
 
 const PlayerGameCardModal = ({

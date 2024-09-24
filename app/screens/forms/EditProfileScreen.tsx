@@ -19,6 +19,7 @@ import ErrorMessage from "../../components/forms/ErrorMessage";
 import ImageInput from "../../components/forms/ImageInput";
 import routes from "../../navigation/routes";
 import Screen from "../../components/Screen";
+import { useAptabase } from "../../hooks/useAptabase";
 
 const validationSchema = Yup.object().shape({
   nickName: Yup.string().required().label("Nick Name"),
@@ -27,6 +28,8 @@ const validationSchema = Yup.object().shape({
 
 const EditProfileScreen = ({ navigation }: any) => {
   const { setUser }: any = useContext(AuthContext);
+  const { trackEvent } = useAptabase();
+  trackEvent("Edit Profile Screen", { screen: "Edit Profile" });
 
   const restoreUser = async () => {
     const user = await authStorage.getUser();

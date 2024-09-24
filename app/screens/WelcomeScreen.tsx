@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -58,6 +58,10 @@ const WelcomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       console.error("Error during guest login", error);
     }
   };
+
+  useEffect(() => {
+    trackEvent("Welcome Screen", { screen: "Welcome" });
+  }, []);
 
   return (
     <Screen style={{ flex: 1 }}>

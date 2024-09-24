@@ -34,6 +34,7 @@ import getLeaguePlayers from "../../api/leagues";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import useAuth from "../../auth/useAuth";
 import logger from "../../utility/logger";
+import { useAptabase } from "../../hooks/useAptabase";
 
 const NewGameScreen = ({
   route,
@@ -43,6 +44,8 @@ const NewGameScreen = ({
   navigation: any;
 }) => {
   const isFocused = useIsFocused(); // Add this line
+  const { trackEvent } = useAptabase();
+
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<any>();
   const [loading, setLoading] = useState(false);
@@ -61,6 +64,7 @@ const NewGameScreen = ({
 
   useEffect(() => {
     if (isFocused) {
+      trackEvent("New Game Screen", { screen: "New Game" });
       setUserGamesData(route.params.userGames);
     }
   }, [isFocused]);

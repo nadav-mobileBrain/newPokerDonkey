@@ -85,6 +85,7 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
     if (isFocused) {
       fetchLeagues();
     }
+    trackEvent("League Screen", { screen: "League" });
   }, [isFocused]);
 
   const fetchLeagues = async () => {

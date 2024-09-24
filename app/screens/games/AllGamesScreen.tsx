@@ -17,6 +17,7 @@ import gameApi from "../../api/game";
 import HeaderText from "../../components/HeaderText";
 import Screen from "../../components/Screen";
 import useApi from "../../hooks/useApi";
+import { useAptabase } from "../../hooks/useAptabase";
 
 const AllGamesScreen = ({
   route,
@@ -26,6 +27,8 @@ const AllGamesScreen = ({
   leagueIdForPushNotifications?: string | null;
 }) => {
   const isFocused = useIsFocused(); // Add this line
+  const { trackEvent } = useAptabase();
+
   const leagueId = route.params.league.id;
   const league = route.params.league;
   const [games, setGames] = useState<any[]>([]);
@@ -54,6 +57,7 @@ const AllGamesScreen = ({
     if (isFocused) {
       fetchGames();
     }
+    trackEvent("All Games Screen", { screen: "All Games" });
   }, [isFocused]);
 
   return (

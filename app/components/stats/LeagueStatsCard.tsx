@@ -36,10 +36,13 @@ const LeagueStatsCard = ({ league }: any) => {
           source={{ uri: `${config.s3.baseUrl}${league.league_image}` }}
           style={styles.image}
         />
-        <AppText style={styles.leagueName} numberOfLines={1}>
+        <AppText
+          style={styles.leagueName}
+          numberOfLines={1}
+          ellipsizeMode="tail">
           {league.league_name}
         </AppText>
-        <AppText style={styles.number} numberOfLines={1}>
+        <AppText style={styles.number} numberOfLines={1} ellipsizeMode="tail">
           League No.: {league.league_number}
         </AppText>
       </View>
@@ -73,12 +76,14 @@ const StatItem = ({
   <View style={styles.statItem}>
     <AppText
       style={[styles.statLabel, ...(small ? [styles.small] : [])]}
-      numberOfLines={1}>
+      numberOfLines={1}
+      ellipsizeMode="tail">
       {label}:
     </AppText>
     <AppText
       style={[styles.statValue, ...(small ? [styles.small] : [])]}
-      numberOfLines={1}>
+      numberOfLines={1}
+      ellipsizeMode="tail">
       {value}
     </AppText>
   </View>
@@ -107,10 +112,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "bold",
     textAlign: "center",
+    flex: 1,
   },
   number: {
     fontSize: 12,
     textAlign: "center",
+    flex: 1,
   },
   statsContainer: {
     flex: 2,
