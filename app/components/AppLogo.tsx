@@ -15,17 +15,17 @@ const AppLogo = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    marginBottom: 5,
+    marginBottom: 2,
   },
   image: {
-    width: 60,
-    height: 60,
+    width: 40,
+    height: 40,
     borderRadius: 30,
     borderColor: colors.gold,
     borderWidth: 2,
   },
   title: {
-    fontSize: 18,
+    fontSize: 13,
     fontFamily: "Roboto_700Bold",
     color: colors.gold,
     textDecorationLine: "underline",

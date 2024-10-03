@@ -67,7 +67,6 @@ const EditLeagueScreen = ({
     };
 
     const result = await updateLeagueDetailsApi.request(completeLeagueInfo);
-    console.log("🚀 ~ handleSubmit ~ result:", result.data);
     if (!result.ok) {
       if (result.data) {
         setError((result.data as any).error);

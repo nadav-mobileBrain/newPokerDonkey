@@ -78,7 +78,8 @@ const AllGamesScreen = ({
           <AppLogo />
           {games.length === 0 ? (
             <Text style={styles.noGames}>
-              No games found! start a game to see stats
+              Only games that have been played will be shown here. Start a game
+              to see stats.
             </Text>
           ) : null}
           <HeaderText style={{ color: colors.secondary }}>

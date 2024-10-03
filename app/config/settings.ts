@@ -1,12 +1,12 @@
 // import Constants from "expo-constants";
 
-const homeIp = "10.0.0.2";
+const homeIp = "10.0.0.13";
 const workIp = "192.168.1.124";
 const meirIp = "192.168.1.152";
 
 const settings = {
   dev: {
-    baseURL: `http://${workIp}:3030/`,
+    baseURL: `http://${homeIp}:3030/`,
   },
   production: {
     baseURL: `https://backend-donk-ae6a3b674658.herokuapp.com/`,

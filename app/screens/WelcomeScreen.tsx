@@ -47,7 +47,6 @@ const WelcomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       const result = await getTestUserDetailsApi.request();
 
       if (!result.ok) {
-        console.log("🚀 ~ takeATour ~ result.data:", result.data);
         return;
       }
       const testUser: UserInfo = (result.data as any).testUser;

@@ -13,6 +13,7 @@ import ActivityIndicator from "../../components/ActivityIndicator";
 import AppButton from "../../components/AppButton";
 import AppLogo from "../../components/AppLogo";
 import AppText from "../../components/AppText";
+import AppSmallIconButton from "../../components/forms/AppSmallIconButton";
 import config from "../../config/config";
 import Card from "../../components/Card";
 import CreatejoinLeagues from "../../components/leagues/CreateJoinLeagues";
@@ -128,6 +129,17 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
           <PlayerAvatar />
           <AppLogo />
           <HowToPlay navigation={navigation} />
+          <AppSmallIconButton
+            title="Global Leaderboard"
+            icon="trophy"
+            color="gold"
+            onPress={() => {
+              trackEvent("Global Leaderboard Pressed", {
+                userId: user?.userId,
+              });
+              navigation.navigate("GlobalLeaderBoard");
+            }}
+          />
           <HeaderText style={styles.headerText}>My Leagues</HeaderText>
           {getLeaguesApi.error && (
             <>
@@ -145,17 +157,6 @@ const LeagueScreen = ({ navigation }: { navigation: any }) => {
           {leagues?.leagues?.length > 0 && (
             <CreatejoinLeagues navigation={navigation} />
           )}
-          <AppButton
-            title="Global Leaderboard"
-            icon="trophy"
-            color="gold"
-            onPress={() => {
-              trackEvent("Global Leaderboard Pressed", {
-                userId: user?.userId,
-              });
-              navigation.navigate("GlobalLeaderBoard");
-            }}
-          />
 
           {leagues?.leagues?.length > 0 && (
             <FlatList
@@ -203,7 +204,7 @@ const styles = StyleSheet.create({
   },
 
   headerText: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: "bold",
     color: colors.gold,
     fontFamily: "Roboto_700Bold",

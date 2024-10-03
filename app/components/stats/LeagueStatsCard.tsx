@@ -49,14 +49,17 @@ const LeagueStatsCard = ({ league }: any) => {
       <View style={styles.statsContainer}>
         <StatItem
           label="Total Cash Played"
-          value={`${leagueStats?.totalCashPlayed} $`}
+          value={`${leagueStats?.totalCashPlayed ?? 0} $`}
         />
         <StatItem label="Total Hours Played" value={leagueStats?.totalHours} />
         <StatItem label="Total Games" value={leagueStats?.gamesCount} />
-        <StatItem label="Last Game" value={leagueStats?.lastGame?.created_at} />
+        <StatItem
+          label="Last Game"
+          value={leagueStats?.lastGame?.created_at ?? "N/A"}
+        />
         <StatItem
           label="Avg Buy Ins Per Game"
-          value={leagueStats?.avgTotalBuyInsPerGameForLeague}
+          value={leagueStats?.avgTotalBuyInsPerGameForLeague ?? 0}
           small
         />
       </View>

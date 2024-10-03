@@ -60,7 +60,6 @@ const EditProfileScreen = ({ navigation }: any) => {
     };
 
     const result = await updatePersonaldetailsApi.request(completeUserInfo);
-    console.log("🚀 ~ handleSubmit ~ result:", result);
 
     if (!result.ok) {
       const errorMsg =

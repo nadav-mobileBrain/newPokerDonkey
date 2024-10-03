@@ -111,7 +111,7 @@ const GlobalLeaderBoardScreen: React.FC = () => {
         <View style={styles.overlay} />
         <View style={styles.headerContainer}>
           <HeaderText style={styles.headerText}>Global Leaderboard</HeaderText>
-          <AppText style={{ color: colors.gold }}>Top 10 players</AppText>
+          <AppText style={{ color: colors.gold }}>Top Players</AppText>
         </View>
         {error && <Text style={styles.errorText}>{error}</Text>}
         <AnimatedFlatList

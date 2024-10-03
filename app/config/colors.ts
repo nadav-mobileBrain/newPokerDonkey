@@ -6,6 +6,7 @@ export default {
   secondary: "#58E6D9",
   light: "#f8f4f4",
   blue: "#0048ff",
+  lightBlue: "#00bfff",
   medium: "#6e6969",
   danger: "#ff5252",
   green: "#4cd137",

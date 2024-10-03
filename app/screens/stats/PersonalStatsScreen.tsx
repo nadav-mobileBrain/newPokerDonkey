@@ -78,61 +78,116 @@ const PersonalStatsScreen = ({ route }: { route: any }) => {
   }, [userId]);
 
   const renderTotalStats = () => {
-    if (!personalStats?.totalStats) return null;
+    // if (!personalStats?.totalStats) return null;
     const stats = [
-      { title: "Total Games", value: personalStats.totalStats[0].totalGames },
-      { title: "Total Profit", value: personalStats.totalStats[0].totalProfit },
+      {
+        title: "Total Games",
+        value: personalStats?.totalStats
+          ? personalStats.totalStats[0].totalGames
+          : 0,
+      },
+      {
+        title: "Total Profit",
+        value: personalStats?.totalStats
+          ? personalStats.totalStats[0].totalProfit
+          : 0,
+      },
       {
         title: "Total Hours",
-        value: personalStats.totalStats[0].totalHoursPlayed,
+        value: personalStats?.totalStats
+          ? personalStats.totalStats[0].totalHoursPlayed
+          : 0,
       },
       {
         title: "Total Buy In",
-        value: personalStats.totalStats[0].totalBuyInsAmount,
+        value: personalStats?.totalStats
+          ? personalStats.totalStats[0].totalBuyInsAmount
+          : 0,
       },
       {
         title: "Current Win Streak",
-        value: personalStats.streaksData[0].title,
+        value: personalStats?.totalStats
+          ? personalStats.streaksData[0].title
+          : 0,
       },
-      { title: "Max Win Streak", value: personalStats.streaksData[0].subTitle },
+      {
+        title: "Max Win Streak",
+        value: personalStats?.totalStats
+          ? personalStats.streaksData[0].subTitle
+          : 0,
+      },
       {
         title: "Total Games With Profit",
-        value: personalStats.totalStats[0].gamesWithProfit,
+        value: personalStats?.totalStats
+          ? personalStats.totalStats[0].gamesWithProfit
+          : 0,
       },
       {
         title: "Success Rate %",
-        value: personalStats.totalStats[0].successRate,
+        value: personalStats?.totalStats
+          ? personalStats.totalStats[0].successRate
+          : 0,
       },
-      { title: "Max Win", value: personalStats.totalStats[0].maxProfit },
-      { title: "Max Loss", value: personalStats.totalStats[0].minProfit },
+      {
+        title: "Max Win",
+        value: personalStats?.totalStats
+          ? personalStats.totalStats[0].maxProfit
+          : 0,
+      },
+      {
+        title: "Max Loss",
+        value: personalStats?.totalStats
+          ? personalStats.totalStats[0].minProfit
+          : 0,
+      },
       {
         title: "Best League Rank",
-        value: personalStats.totalStats[0].maxSeasonRank,
+        value: personalStats?.totalStats
+          ? personalStats.totalStats[0].maxSeasonRank
+          : 0,
       },
     ];
     return <StatsSection title="Total Stats" stats={stats} />;
   };
 
   const renderAvgStats = () => {
-    if (!personalStats?.avgStats) return null;
+    // if (!personalStats?.avgStats) return null;
     const stats = [
-      { title: "Avg Profit", value: personalStats.avgStats[0].avgProfit },
+      {
+        title: "Avg Profit",
+        value: personalStats?.totalStats
+          ? personalStats.avgStats[0].avgProfit
+          : 0,
+      },
       {
         title: "Avg Buy Ins",
-        value: personalStats.avgStats[0].avgBuyInsAmount,
+        value: personalStats?.totalStats
+          ? personalStats.avgStats[0].avgBuyInsAmount
+          : 0,
       },
       {
         title: "Avg Cash In Hand",
-        value: personalStats.avgStats[0].avgCashInHand,
+        value: personalStats?.totalStats
+          ? personalStats.avgStats[0].avgCashInHand
+          : 0,
       },
       {
         title: "Avg Hours Played",
-        value: personalStats.avgStats[0].avgHoursPlayed,
+        value: personalStats?.totalStats
+          ? personalStats.avgStats[0].avgHoursPlayed
+          : 0,
       },
-      { title: "Avg Game Rank", value: personalStats.avgStats[0].avgGameRank },
+      {
+        title: "Avg Game Rank",
+        value: personalStats?.totalStats
+          ? personalStats.avgStats[0].avgGameRank
+          : 0,
+      },
       {
         title: "Avg Season Rank",
-        value: personalStats.avgStats[0].avgSeasonRank,
+        value: personalStats?.totalStats
+          ? personalStats.avgStats[0].avgSeasonRank
+          : 0,
       },
     ];
     return <StatsSection title="Average Stats" stats={stats} />;
@@ -152,18 +207,19 @@ const PersonalStatsScreen = ({ route }: { route: any }) => {
           </View>
           <AppText style={styles.name}>{user.nickName}</AppText>
 
-          {!personalStats?.games?.length ? (
+          {/* {!personalStats?.games?.length ? (
             <View style={styles.noGamesContainer}>
               <AppText style={styles.noGames}>No Games Played Yet</AppText>
               <AppText style={styles.noGames}>
                 Play a game to see your stats
               </AppText>
             </View>
-          ) : (
-            <>
-              {renderTotalStats()}
-              {renderAvgStats()}
+          ) : ( */}
+          <>
+            {renderTotalStats()}
+            {renderAvgStats()}
 
+            {personalStats?.games?.length > 0 && (
               <AppButton
                 title="Games History"
                 color="gold"
@@ -177,8 +233,9 @@ const PersonalStatsScreen = ({ route }: { route: any }) => {
                   });
                 }}
               />
-            </>
-          )}
+            )}
+          </>
+          {/* )} */}
         </ImageBackground>
       </Screen>
     </>

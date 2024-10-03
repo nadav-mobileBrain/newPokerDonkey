@@ -47,7 +47,7 @@ const HowToPlayScreen = () => {
             <AppText
               style={{
                 color: colors.gold,
-                fontSize: 16,
+                fontSize: 12,
                 textDecorationLine: "underline",
                 marginLeft: 10,
               }}
