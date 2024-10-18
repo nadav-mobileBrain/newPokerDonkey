@@ -55,14 +55,14 @@ const AppSmallIconButton = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: "50%",
-    alignSelf: "center",
-    alignItems: "center",
+    width: "100%", // Make the container take full width
+    alignItems: "center", // Center the button horizontally
     marginTop: 10,
   },
   button: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center", // Center the content within the button
     backgroundColor: colors.blue,
     paddingVertical: 5,
     paddingHorizontal: 10,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.white,
-    fontSize: 18,
+    fontSize: 12,
     textAlign: "center",
     fontFamily: "Roboto_700Bold",
     marginLeft: 5,

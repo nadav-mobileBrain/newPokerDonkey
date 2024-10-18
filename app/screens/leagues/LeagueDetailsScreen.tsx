@@ -108,7 +108,7 @@ const LeagueDetailsScreen = ({
         />
         <AppButton
           title={isLiveGameOn ? "Join Live Game" : "Start A New Game"}
-          color="secondary"
+          color="lightBlue"
           icon="cards-playing-spade-multiple-outline"
           onPress={() => {
             trackEvent("New Game StartScreen", {

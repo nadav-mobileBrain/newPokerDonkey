@@ -81,46 +81,47 @@ const AllGamesCard = ({ game }: any) => {
           name="pen"
           size={30}
           backgroundColor={colors.gold}
-          iconColor={colors.purple}
+          iconColor={colors.blue}
         />
         <AppText style={styles.iconText}>Edit Game</AppText>
       </TouchableOpacity>
 
-      <AppText style={styles.gameDetails}>
-        {dayjs(game.created_at).format("DD/MM/YYYY")}
-      </AppText>
-      <AppText style={styles.gameDetails}>
-        {dayjs(game.created_at).format("HH:mm")}-
-        {dayjs(game.updated_at).format("HH:mm")}
-      </AppText>
-      <AppText style={styles.gameManager}>
-        Game Manager:
-        {game?.game_manager?.nickName}
-      </AppText>
-      {game.was_edited && (
-        <AppText style={styles.edited}>
-          Game details were edited on{" "}
-          {dayjs(game.updated_at).format("DD/MM/YYYY")}
+      <View style={styles.detailsContainer}>
+        <AppText style={styles.date}>
+          {dayjs(game.created_at).format("DD/MM/YYYY")}
         </AppText>
-      )}
-      {game.isOpen && (
-        <Animated.Text
-          style={[
-            styles.isOpen,
-            {
-              textShadowRadius: flickerAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [1, 10],
-              }),
-              textShadowColor: flickerAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [colors.green, colors.darkGreen],
-              }),
-            },
-          ]}>
-          Live Game
-        </Animated.Text>
-      )}
+        <AppText style={styles.time}>
+          {dayjs(game.created_at).format("HH:mm")}-
+          {dayjs(game.updated_at).format("HH:mm")}
+        </AppText>
+        <AppText style={styles.gameManager}>
+          Game Manager: {game?.game_manager?.nickName}
+        </AppText>
+        {game.was_edited && (
+          <AppText style={styles.edited}>
+            Edited on {dayjs(game.updated_at).format("DD/MM/YYYY")}
+          </AppText>
+        )}
+        {game.isOpen && (
+          <Animated.Text
+            style={[
+              styles.isOpen,
+              {
+                textShadowRadius: flickerAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [1, 10],
+                }),
+                textShadowColor: flickerAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [colors.green, colors.darkGreen],
+                }),
+              },
+            ]}>
+            Live Game
+          </Animated.Text>
+        )}
+      </View>
+
       <FlatList
         data={game.user_games}
         keyExtractor={(item) => item.user_id.toString()}
@@ -132,17 +133,18 @@ const AllGamesCard = ({ game }: any) => {
   );
 };
 
+// Updated styles for a modern look
 const styles = StyleSheet.create({
   container: {
     borderRadius: 15,
     marginBottom: 20,
     overflow: "hidden",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
     shadowRadius: 10,
     elevation: 5,
-    backgroundColor: colors.purple,
+    backgroundColor: colors.lightBlue, // Changed to a lighter background
   },
   edited: {
     width: "100%",
@@ -150,6 +152,7 @@ const styles = StyleSheet.create({
     padding: 5,
     color: colors.secondary,
     fontSize: 12,
+    fontStyle: "italic", // Added italic style for emphasis
   },
   icon: {
     top: 10,
@@ -159,40 +162,39 @@ const styles = StyleSheet.create({
   },
   iconText: {
     textAlign: "center",
-    color: colors.gold,
-    fontSize: 8,
+    color: colors.blue,
+    fontSize: 10, // Increased font size for better readability
     justifyContent: "center",
     right: 5,
   },
-
   isOpen: {
     width: "100%",
     textAlign: "center",
     padding: 5,
-    fontSize: 17,
-    //flickering neon green
+    fontSize: 18, // Increased font size for emphasis
     color: colors.green,
     textShadowColor: colors.green,
     textShadowRadius: 1,
     textShadowOffset: { width: 1, height: 1 },
   },
-  gameDetails: {
-    width: "100%",
-    textAlign: "center",
-    padding: 5,
-    color: colors.gold,
-    height: 40,
+  date: {
+    fontSize: 16, // Modern font size
+    color: colors.darkGray, // Changed color for modern look
+    fontWeight: "bold", // Added bold for emphasis
+  },
+  time: {
+    fontSize: 14, // Modern font size
+    color: colors.gray, // Changed color for modern look
   },
   gameManager: {
     width: "100%",
     textAlign: "center",
-    color: colors.gold,
+    color: colors.darkGray, // Changed color for modern look
+    fontSize: 14, // Modern font size
   },
-
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: colors.dark,
-    opacity: 0.5,
+  detailsContainer: {
+    padding: 15, // Increased padding for a spacious look
+    alignItems: "center",
   },
 });
 

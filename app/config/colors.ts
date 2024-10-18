@@ -11,6 +11,8 @@ export default {
   danger: "#ff5252",
   green: "#4cd137",
   darkGreen: "#107E4F",
+  darkGray: "#333333",
+  gray: "#666666",
   primaryGradientArray: ["#8E2DE2", "#4A00E0"],
   secondaryGradientArray: ["#d3b939", "#ffd700"],
 };

@@ -82,7 +82,7 @@ const AllGamesScreen = ({
               to see stats.
             </Text>
           ) : null}
-          <HeaderText style={{ color: colors.secondary }}>
+          <HeaderText style={{ color: colors.gold }}>
             {league?.league_name}
           </HeaderText>
           <FlatList
