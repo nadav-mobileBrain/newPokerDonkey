@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -47,7 +47,6 @@ const WelcomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       const result = await getTestUserDetailsApi.request();
 
       if (!result.ok) {
-        console.log("🚀 ~ takeATour ~ result.data:", result.data);
         return;
       }
       const testUser: UserInfo = (result.data as any).testUser;
@@ -59,12 +58,16 @@ const WelcomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     }
   };
 
+  useEffect(() => {
+    trackEvent("Welcome Screen", { screen: "Welcome" });
+  }, []);
+
   return (
     <Screen style={{ flex: 1 }}>
       <ImageBackground
         style={styles.background}
         source={require("../assets/appLogo.webp")}
-        blurRadius={7}>
+        blurRadius={3}>
         <View style={styles.overlay} />
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.logoContainer}>
@@ -164,16 +167,16 @@ const styles = StyleSheet.create({
   developerText: {
     color: colors.gold,
     textAlign: "center",
-    marginTop: 10,
+    marginTop: 14,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.dark,
-    opacity: 0.5,
+    opacity: 0.75,
   },
   tAndC: {
     color: colors.light,
-    fontSize: 12,
+    fontSize: 15,
     textAlign: "center",
     marginTop: 5,
     textDecorationLine: "underline",

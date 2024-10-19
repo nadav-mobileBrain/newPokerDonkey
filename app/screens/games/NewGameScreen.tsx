@@ -34,6 +34,7 @@ import getLeaguePlayers from "../../api/leagues";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import useAuth from "../../auth/useAuth";
 import logger from "../../utility/logger";
+import { useAptabase } from "../../hooks/useAptabase";
 
 const NewGameScreen = ({
   route,
@@ -43,6 +44,8 @@ const NewGameScreen = ({
   navigation: any;
 }) => {
   const isFocused = useIsFocused(); // Add this line
+  const { trackEvent } = useAptabase();
+
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<any>();
   const [loading, setLoading] = useState(false);
@@ -61,6 +64,7 @@ const NewGameScreen = ({
 
   useEffect(() => {
     if (isFocused) {
+      trackEvent("New Game Screen", { screen: "New Game" });
       setUserGamesData(route.params.userGames);
     }
   }, [isFocused]);
@@ -231,6 +235,7 @@ const NewGameScreen = ({
                 title="End Game"
                 color="gold"
                 onPress={() => moneyLeftInBank()}
+                icon="cards-playing-club-multiple-outline"
               />
               <Modal visible={modalVisible} animationType="slide">
                 <Button title="Cancel" onPress={() => setModalVisible(false)} />
@@ -295,7 +300,8 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    padding: 20,
+    // padding: 20,
+    paddingHorizontal: 20,
   },
   button: {
     color: colors.gold,
@@ -327,7 +333,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 15, // Added this line
     overflow: "hidden", // Ensure the FlatList items respect the border radius
     backgroundColor: colors.white, // Match the FlatList background to the container
-    maxHeight: 350, // Adjust the height as needed
+    maxHeight: 300, // Adjust the height as needed
     flexGrow: 0,
     marginBottom: 5,
   },

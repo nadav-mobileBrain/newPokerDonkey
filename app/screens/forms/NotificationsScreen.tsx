@@ -91,6 +91,7 @@ const NotificationsScreen = (props: any) => {
           title="Save Selection"
           color="gold"
           onPress={() => updateNotificationSettings()}
+          icon="content-save"
         />
       </View>
     </Screen>
@@ -119,6 +120,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 16,
     justifyContent: "center",
+    height: 50,
   },
   label: {
     fontSize: 18,

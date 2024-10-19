@@ -16,6 +16,7 @@ import AddRemovePlayers from "../screens/games/AddRemovePlayers";
 import EditGameScreen from "../screens/games/EditGameScreen";
 import PersonalStatsGamesList from "../screens/stats/PersonalStatsGamesList";
 import HowToPlayScreen from "../screens/HowToPlayScreen";
+import GlobalLeaderBoardScreen from "../screens/stats/GlobalLeaderBoardScreen";
 
 const Stack = createStackNavigator();
 
@@ -95,6 +96,11 @@ const FeedNavigator = () => (
       name="HowToPlay"
       component={HowToPlayScreen}
       options={{ title: "How To Play" }}
+    />
+    <Stack.Screen
+      name="GlobalLeaderBoard"
+      component={GlobalLeaderBoardScreen}
+      options={{ title: "Global Leaderboard" }}
     />
   </Stack.Navigator>
 );

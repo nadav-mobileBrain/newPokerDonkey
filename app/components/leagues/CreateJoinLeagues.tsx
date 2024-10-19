@@ -4,22 +4,30 @@ import AppText from "../AppText";
 import routes from "../../navigation/routes";
 import colors from "../../config/colors";
 import { NavigationProp } from "@react-navigation/native";
+import { useAptabase } from "../../hooks/useAptabase";
 
 const CreatejoinLeagues = ({
   navigation,
 }: {
   navigation: NavigationProp<any>;
 }) => {
+  const { trackEvent } = useAptabase();
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate(routes.JOIN_LEAGUE)}>
+        onPress={() => {
+          trackEvent("Join League Pressed");
+          navigation.navigate(routes.JOIN_LEAGUE);
+        }}>
         <AppText style={styles.text}>Join a private league</AppText>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate(routes.CREATE_LEAGUE)}>
+        onPress={() => {
+          trackEvent("Create League Pressed");
+          navigation.navigate(routes.CREATE_LEAGUE);
+        }}>
         <AppText style={styles.text}>+Create a league</AppText>
       </TouchableOpacity>
     </View>
@@ -45,7 +53,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   text: {
-    fontSize: 12,
+    fontSize: 13,
     fontFamily: "Roboto_700Bold",
     color: colors.light,
   },

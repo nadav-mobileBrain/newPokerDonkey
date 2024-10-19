@@ -1,21 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import AppText from "../components/AppText";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
+import { useAptabase } from "../hooks/useAptabase";
 
 const PrivacyPolicyScreen = () => {
   const insets = useSafeAreaInsets();
-
+  const { trackEvent } = useAptabase();
+  useEffect(() => {
+    trackEvent("Privacy Policy Screen", { screen: "Privacy Policy" });
+  }, []);
   return (
     <Screen style={styles.screen}>
       <View style={[styles.container, { paddingBottom: insets.bottom }]}>
         <AppText style={styles.title}>Privacy Policy</AppText>
         <ScrollView style={styles.scrollView}>
           <AppText style={styles.text}>
-            Last Updated: 24/08/2024 {"\n"} 1. Introduction Poker Donkey ("we",
+            Last Updated: 24/09/2024 {"\n"} 1. Introduction Poker Donkey ("we",
             "our", or "us") is committed to protecting your privacy. This
             Privacy Policy explains how we collect, use, disclose, and safeguard
             your information when you use our mobile application (the "App").

@@ -19,6 +19,7 @@ import ErrorMessage from "../../components/forms/ErrorMessage";
 import ImageInput from "../../components/forms/ImageInput";
 import routes from "../../navigation/routes";
 import Screen from "../../components/Screen";
+import { useAptabase } from "../../hooks/useAptabase";
 
 const validationSchema = Yup.object().shape({
   nickName: Yup.string().required().label("Nick Name"),
@@ -27,6 +28,8 @@ const validationSchema = Yup.object().shape({
 
 const EditProfileScreen = ({ navigation }: any) => {
   const { setUser }: any = useContext(AuthContext);
+  const { trackEvent } = useAptabase();
+  trackEvent("Edit Profile Screen", { screen: "Edit Profile" });
 
   const restoreUser = async () => {
     const user = await authStorage.getUser();
@@ -57,7 +60,6 @@ const EditProfileScreen = ({ navigation }: any) => {
     };
 
     const result = await updatePersonaldetailsApi.request(completeUserInfo);
-    console.log("🚀 ~ handleSubmit ~ result:", result);
 
     if (!result.ok) {
       const errorMsg =
@@ -95,7 +97,9 @@ const EditProfileScreen = ({ navigation }: any) => {
       <Screen style={styles.container}>
         <LinearGradient
           colors={colors.primaryGradientArray}
-          style={styles.background}>
+          style={styles.background}
+          accessible={true}
+          accessibilityLabel="Edit profile screen background">
           <AppForm
             initialValues={{ nickName: user?.nickName }}
             onSubmit={handleSubmit}

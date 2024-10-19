@@ -3,6 +3,7 @@ import { Image, View, StyleSheet } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 
 import AppButton from "../../components/AppButton";
+import ActivityIndicator from "../../components/ActivityIndicator";
 import AppText from "../../components/AppText";
 import colors from "../../config/colors";
 import gameApi from "../../api/game";
@@ -32,6 +33,7 @@ const SelectPlayersScreen = ({
 
   const gameAdminId = user?.userId;
   const [selectedPlayers, setSelectedPlayers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const isFocused = useIsFocused(); // Add this line
   const [error, setError] = useState<String>("");
@@ -41,6 +43,7 @@ const SelectPlayersScreen = ({
 
   useEffect(() => {
     if (isFocused) {
+      setLoading(true);
       const checkIfOpenGames = async () => {
         const result = await checkIfOpenGameExist.request(league.id);
         if (result.ok) {
@@ -55,7 +58,9 @@ const SelectPlayersScreen = ({
         }
       };
       checkIfOpenGames();
+      setLoading(false);
     }
+    trackEvent("Select Players Screen", { screen: "Select Players" });
   }, [isFocused]);
 
   const onSelectedPlayer = (player: any) => {
@@ -81,6 +86,7 @@ const SelectPlayersScreen = ({
       return;
     }
     trackEvent("started a new game", { newGameForLeague: league.id });
+    setLoading(true);
     const result = await createNewGameApi.request({
       selectedPlayers,
       leagueId: league.id,
@@ -102,14 +108,16 @@ const SelectPlayersScreen = ({
       league,
       userGames: (result.data as any).userGames,
     });
+    setLoading(false);
   };
 
   return (
     <Screen style={styles.container}>
+      <ActivityIndicator visible={loading} />
       <Container position="top" style={{ width: "100%" }} />
       <View style={styles.selectContainer}>
         <HeaderText style={styles.title}> Select Players </HeaderText>
-        <HowToPlay navigation={navigation} textColor="blue" />
+        <HowToPlay navigation={navigation} />
         {error && <AppText>{error}</AppText>}
         {unselectedPlayers.length > 0 && (
           <AppText style={styles.addRemove}>

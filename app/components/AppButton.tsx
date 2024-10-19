@@ -5,32 +5,54 @@ import {
   TouchableOpacity,
   View,
   GestureResponderEvent,
+  StyleProp,
+  ViewStyle,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
+
+// Define a type for the keys of the colors object
+type ColorKeys = keyof typeof colors;
 
 // Define the props type for the component
 interface AppButtonProps {
   title: string;
   onPress: (event: GestureResponderEvent) => void;
-  color?: keyof typeof colors; // Ensures the color is a key from the colors object
-  icon?: string;
+  color?: ColorKeys;
+  icon?: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
+  accessibilityHint?: string;
 }
 
 const AppButton: React.FC<AppButtonProps> = ({
   title,
   onPress,
   color = "blue",
-  icon = "",
+  icon,
+  accessibilityHint = "Tap to press the button",
 }) => {
+  // Ensure that the color is a valid key in the colors object
+  const backgroundColor = colors[color] || colors.blue;
+
+  const buttonStyle: StyleProp<ViewStyle> = [
+    styles.button,
+    {
+      backgroundColor: Array.isArray(backgroundColor)
+        ? backgroundColor[0]
+        : backgroundColor,
+    },
+  ];
+
   return (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: colors[color] }]}
-      onPress={onPress}>
+      style={buttonStyle}
+      onPress={onPress}
+      accessible={true}
+      accessibilityLabel={title}
+      accessibilityHint={accessibilityHint}>
       <View style={styles.content}>
         {icon && (
           <MaterialCommunityIcons
-            name={icon as any} // If you want strict typing, define icon as a union type of allowed strings
+            name={icon}
             size={24}
             color={colors.dark}
             style={styles.icon}
@@ -44,7 +66,6 @@ const AppButton: React.FC<AppButtonProps> = ({
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: colors.blue,
     borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",

@@ -50,6 +50,7 @@ const MainStatsScreen = ({ route }: { route: any }) => {
           <AppButton
             title="All Games"
             color="gold"
+            icon="calendar"
             onPress={() => {
               trackEvent("All Games Button Pressed", { league: league.name });
               navigation.navigate(routes.ALL_GAMES, { league });
@@ -83,13 +84,13 @@ const styles = StyleSheet.create({
   buyMeCoffe: {
     color: colors.gold,
     textAlign: "center",
-    fontSize: 10,
+    fontSize: 12,
     marginBottom: 5,
   },
   developerText: {
     color: colors.gold,
     textAlign: "center",
-    fontSize: 10,
+    fontSize: 14,
   },
   remark: {
     color: colors.light,

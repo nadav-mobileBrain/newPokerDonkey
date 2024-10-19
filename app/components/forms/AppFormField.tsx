@@ -30,6 +30,8 @@ function AppFormField({
         onChangeText={handleChange(name)}
         width={width}
         value={values[name]}
+        accessibilityLabel={`Input field for ${name}`}
+        accessibilityHint="Enter text"
       />
       <ErrorMessage error={errors[name]} visible={touched[name]} />
     </>
@@ -39,6 +41,7 @@ function AppFormField({
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row-reverse",
+    height: 50,
   },
 });
 

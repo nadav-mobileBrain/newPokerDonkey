@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import AppText from "../components/AppText";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
+import { useAptabase } from "../hooks/useAptabase";
 
 const TermsAndConditionsScreen = () => {
   const insets = useSafeAreaInsets();
-
+  const { trackEvent } = useAptabase();
+  useEffect(() => {
+    trackEvent("Terms and Conditions Screen", {
+      screen: "Terms and Conditions",
+    });
+  }, []);
   return (
     <Screen style={styles.screen}>
       <View style={[styles.container, { paddingBottom: insets.bottom }]}>
         <AppText style={styles.title}>Terms and Conditions</AppText>
         <ScrollView style={styles.scrollView}>
           <AppText style={styles.text}>
-            Last updated: 21/08/2024 {"\n"}1. Acceptance of Terms By accessing
+            Last updated: 24/09/2024 {"\n"}1. Acceptance of Terms By accessing
             or using the Poker Donkey app ("the App"), you agree to comply with
             and be bound by these Terms and Conditions. If you do not agree to
             these terms, please do not use the App. {"\n"} 2. Description of
@@ -62,11 +68,17 @@ const TermsAndConditionsScreen = () => {
             material, we will provide at least 30 days' notice prior to any new
             terms taking effect. {"\n"}11. Governing Law These Terms shall be
             governed by and construed in accordance with the laws of Israel,
-            without regard to its conflict of law provisions. {"\n"}12. Contact
-            Us If you have any questions about these Terms, please contact us at
-            nadavg1000@gmail.com. By using Poker Donkey, you acknowledge that
-            you have read and understood these Terms and Conditions and agree to
-            be bound by them.
+            without regard to its conflict of law provisions.
+            {"\n"}
+            12.Poker Donkey is not a gambling application. It is designed solely
+            for managing and displaying statistics related to home poker games
+            and does not facilitate or involve real-money gambling. The app is
+            intended for personal use to track poker game results among friends.
+            No real money is exchanged through the use of this app.
+            {"\n"}13. Contact Us If you have any questions about these Terms,
+            please contact us at nadavg1000@gmail.com. By using Poker Donkey,
+            you acknowledge that you have read and understood these Terms and
+            Conditions and agree to be bound by them.
           </AppText>
         </ScrollView>
       </View>

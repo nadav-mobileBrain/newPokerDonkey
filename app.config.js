@@ -3,7 +3,7 @@ export default {
     name: "Poker Donkey",
     slug: "newPokerDonkey",
     scheme: "newpokerdonkey",
-    version: "1.0.61",
+    version: "1.0.70",
     orientation: "portrait",
     icon: "./app/assets/appLogo.png",
     userInterfaceStyle: "light",
@@ -20,7 +20,7 @@ export default {
       [
         "react-native-google-mobile-ads",
         {
-          androidAppId: "ca-app-pub-4169403957560964~6914057081",
+          androidAppId: "ca-app-pub-4169403957560964~8527755184",
           iosAppId: "ca-app-pub-4169403957560964~5798113087",
         },
       ],
@@ -30,14 +30,15 @@ export default {
       bundleIdentifier: "com.nadavg.newpokerdonkey",
     },
     android: {
-      versionCode: 3,
+      versionCode: 12,
       adaptiveIcon: {
         foregroundImage: "./app/assets/appLogo.png",
         backgroundColor: "#ffffff",
       },
+      permissions: ["com.google.android.gms.persmission.AD_ID"],
 
       package: "com.nadavg.newpokerdonkey",
-      googleServicesFile: process.env.GOOGLE_SERVICES_JSON,
+      googleServicesFile: process.env.GOOGLE_SERVICES_NEW_ADS_JSON,
     },
     web: {
       favicon: "./assets/favicon.png",

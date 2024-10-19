@@ -44,7 +44,6 @@ const LeagueDetailsScreen = ({
   const insets = useSafeAreaInsets();
   const { trackEvent } = useAptabase();
 
-  // console.log(`${config.s3.baseUrl}${league.league_image}`);
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -90,10 +89,10 @@ const LeagueDetailsScreen = ({
             Edit league details
           </AppText>
         )}
-        <HowToPlay navigation={navigation} textColor="blue" align="center" />
+        <HowToPlay navigation={navigation} align="center" />
       </View>
 
-      <PlayerInfo leaguePlayers={leaguePlayers} width={20} height={20} />
+      <PlayerInfo leaguePlayers={leaguePlayers} width={35} height={35} />
       <View style={styles.buttonContainer}>
         <AppButton
           title="League Stats"
@@ -109,7 +108,7 @@ const LeagueDetailsScreen = ({
         />
         <AppButton
           title={isLiveGameOn ? "Join Live Game" : "Start A New Game"}
-          color="secondary"
+          color="lightBlue"
           icon="cards-playing-spade-multiple-outline"
           onPress={() => {
             trackEvent("New Game StartScreen", {
@@ -178,7 +177,7 @@ const styles = StyleSheet.create({
   buyMeCoffe: {
     color: colors.gold,
     textAlign: "center",
-    fontSize: 10,
+    fontSize: 12,
     marginBottom: 5,
   },
   contentContainer: {
@@ -194,7 +193,7 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.dark,
-    opacity: 0.2,
+    opacity: 0.5,
   },
   playerContainer: {
     borderRadius: 15,
@@ -210,7 +209,7 @@ const styles = StyleSheet.create({
   developerText: {
     color: colors.gold,
     textAlign: "center",
-    fontSize: 10,
+    fontSize: 14,
   },
   image: {
     width: "100%",
