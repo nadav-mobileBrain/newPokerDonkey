@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   View,
   Text,
   FlatList,
   StyleSheet,
   ImageBackground,
+  ListRenderItem,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import Container from "toastify-react-native";
@@ -26,39 +29,94 @@ const AllGamesScreen = ({
   route: any;
   leagueIdForPushNotifications?: string | null;
 }) => {
-  const isFocused = useIsFocused(); // Add this line
+  const isFocused = useIsFocused();
   const { trackEvent } = useAptabase();
 
   const leagueId = route.params.league.id;
   const league = route.params.league;
   const [games, setGames] = useState<any[]>([]);
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(true); // Initially true to load the first page
-  const [continuationToken, setContinuationToken] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [continuationToken, setContinuationToken] = useState<string | null>(
+    null
+  );
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const getAllGamesForLeagueApi = useApi(gameApi.getAllGamesForLeague);
+  const flatListRef = useRef<FlatList>(null);
 
-  const fetchGames = async () => {
-    const result = await getAllGamesForLeagueApi.request(
-      leagueId,
-      continuationToken
-    );
-    if (!result.ok) {
-      setError("Failed to load games");
+  const fetchGames = useCallback(
+    async (token: string | null) => {
+      if (isLoading) return;
+
+      setIsLoading(true);
+      const result = await getAllGamesForLeagueApi.request(
+        leagueId,
+        token,
+        3 // Pass the number of games to fetch
+      );
+      if (!result.ok) {
+        setError("Failed to load games");
+        setIsLoading(false);
+        return;
+      }
+
+      const newGames = (result.data as any).games || [];
+      setGames((prevGames) => [...prevGames, ...newGames]);
+
+      const newToken = (result.data as any).nextContinuationToken;
+      setContinuationToken(newToken || null);
+
       setIsLoading(false);
-      return;
+      console.log("Fetched games:", newGames.length, "New token:", newToken);
+    },
+    [leagueId, getAllGamesForLeagueApi, isLoading]
+  );
+
+  useEffect(() => {
+    if (isFocused && isInitialLoad) {
+      setGames([]);
+      fetchGames(null);
+      setIsInitialLoad(false);
     }
-    // Append new games to the existing games
-    setGames((prevGames: any) => [...prevGames, ...(result.data as any).games]);
-    setContinuationToken((result?.data as any).nextContinuationToken); // Update the continuation token
-    setIsLoading(false);
-  };
+  }, [isFocused, isInitialLoad, fetchGames]);
 
   useEffect(() => {
     if (isFocused) {
-      fetchGames();
+      trackEvent("All Games Screen", { screen: "All Games" });
     }
-    trackEvent("All Games Screen", { screen: "All Games" });
-  }, [isFocused]);
+  }, [isFocused, trackEvent]);
+
+  const handleLoadMore = () => {
+    console.log(
+      "handleLoadMore called. isLoading:",
+      isLoading,
+      "continuationToken:",
+      continuationToken
+    );
+    if (!isLoading && continuationToken) {
+      fetchGames(continuationToken);
+    }
+  };
+
+  const renderItem: ListRenderItem<any> = useCallback(
+    ({ item }) => <AllGamesCard game={item} />,
+    []
+  );
+
+  const keyExtractor = useCallback((item: any) => item.id.toString(), []);
+
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    const contentHeight = event.nativeEvent.contentSize.height;
+    const screenHeight = event.nativeEvent.layoutMeasurement.height;
+
+    // Check if user has scrolled to the bottom (minus a threshold)
+    const threshold = 20; // Adjust this value as needed
+    if (offsetY + screenHeight >= contentHeight - threshold) {
+      console.log("Near bottom, triggering load more");
+      handleLoadMore();
+    }
+  };
 
   return (
     <>
@@ -76,7 +134,7 @@ const AllGamesScreen = ({
           source={require("../../assets/cardstats.webp")}>
           <View style={styles.overlay} />
           <AppLogo />
-          {games.length === 0 ? (
+          {games.length === 0 && !isLoading ? (
             <Text style={styles.noGames}>
               Only games that have been played will be shown here. Start a game
               to see stats.
@@ -86,18 +144,21 @@ const AllGamesScreen = ({
             {league?.league_name}
           </HeaderText>
           <FlatList
+            ref={flatListRef}
             data={games}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => <AllGamesCard game={item} />}
-            onEndReached={() => {
-              if (!isLoading && continuationToken) {
-                // Only load more if not currently loading and there's a token
-                fetchGames();
-              }
-            }}
-            onEndReachedThreshold={0.1}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+            ListFooterComponent={() =>
+              isLoading ? <ActivityIndicator visible={true} /> : null
+            }
+            onScroll={handleScroll}
+            scrollEventThrottle={16} // Adjust for performance
+            removeClippedSubviews={true}
+            maxToRenderPerBatch={10}
+            updateCellsBatchingPeriod={50}
+            windowSize={21}
           />
-          {error ? <Text>Error: {error}</Text> : null}
+          {error ? <Text style={styles.errorText}>Error: {error}</Text> : null}
         </ImageBackground>
       </Screen>
     </>
@@ -129,6 +190,11 @@ const styles = StyleSheet.create({
     color: colors.gold,
     textAlign: "center",
     marginVertical: 20,
+  },
+  errorText: {
+    color: "red",
+    textAlign: "center",
+    marginTop: 10,
   },
 });
 

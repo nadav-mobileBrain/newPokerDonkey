@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "toastify-react-native";
 
 import AppText from "../AppText";
@@ -23,11 +23,19 @@ import useAuth from "../../auth/useAuth";
 
 type RootStackParamList = {
   EditGame: {
-    gameDetails: any; // Replace `any` with the specific type if known
+    gameDetails: GameDetail[]; // Replace `any` with the specific type if known
     user: any | null; // Define `User` type if it's not already defined
   };
   // Add other routes here as needed
 };
+
+interface GameDetail {
+  created_at: string;
+  buy_in_amount: number;
+  User: {
+    nickName: string;
+  };
+}
 
 type AllGamesCardNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -74,6 +82,12 @@ const AllGamesCard = ({ game }: any) => {
     });
   };
 
+  const [gameDetails, setgameDetails] = useState<GameDetail[]>([]); // Initialize with an empty array
+
+  const toggleGameDetails = () => {
+    setgameDetails(gameDetails.length > 0 ? [] : game.gameDetails);
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.icon} onPress={editGame}>
@@ -81,7 +95,7 @@ const AllGamesCard = ({ game }: any) => {
           name="pen"
           size={30}
           backgroundColor={colors.gold}
-          iconColor={colors.blue}
+          iconColor={colors.dark}
         />
         <AppText style={styles.iconText}>Edit Game</AppText>
       </TouchableOpacity>
@@ -128,7 +142,52 @@ const AllGamesCard = ({ game }: any) => {
         ListHeaderComponent={<AllGamesCardHeader />}
         renderItem={({ item }) => <AllGamesPlayers player={item} />}
         ItemSeparatorComponent={ListitemSeperator}
+        ListFooterComponent={
+          <View style={styles.footerContainer}>
+            <TouchableOpacity onPress={() => toggleGameDetails()}>
+              <AppText style={styles.footerText}>
+                {gameDetails.length > 0 ? "Hide Game Log" : "Show Game Log"}
+              </AppText>
+            </TouchableOpacity>
+          </View>
+        }
       />
+
+      {gameDetails && ( // Conditionally render dummy data
+        <View style={styles.gameDetailsContainer}>
+          {gameDetails
+            .sort(
+              (a, b) =>
+                dayjs(a.created_at).valueOf() - dayjs(b.created_at).valueOf()
+            )
+            .map((detail: GameDetail, index) => (
+              <View
+                key={detail.created_at + index}
+                style={{
+                  backgroundColor: index % 2 === 0 ? "white" : "lightgray",
+                }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    padding: 10,
+                    alignItems: "center",
+                  }}>
+                  <AppText style={{ flex: 1, marginRight: 10, fontSize: 12 }}>
+                    {detail.User.nickName}
+                  </AppText>
+                  <AppText
+                    style={{ flex: 1, textAlign: "center", fontSize: 12 }}>
+                    ${detail.buy_in_amount}
+                  </AppText>
+                  <AppText style={{ flex: 1, marginLeft: 10, fontSize: 12 }}>
+                    {dayjs(detail.created_at).format("HH:mm:ss")}
+                  </AppText>
+                </View>
+              </View>
+            ))}
+        </View>
+      )}
     </View>
   );
 };
@@ -150,7 +209,7 @@ const styles = StyleSheet.create({
     width: "100%",
     textAlign: "center",
     padding: 5,
-    color: colors.secondary,
+    color: colors.purple,
     fontSize: 12,
     fontStyle: "italic", // Added italic style for emphasis
   },
@@ -162,7 +221,7 @@ const styles = StyleSheet.create({
   },
   iconText: {
     textAlign: "center",
-    color: colors.blue,
+    color: colors.darkGray,
     fontSize: 10, // Increased font size for better readability
     justifyContent: "center",
     right: 5,
@@ -195,6 +254,21 @@ const styles = StyleSheet.create({
   detailsContainer: {
     padding: 15, // Increased padding for a spacious look
     alignItems: "center",
+  },
+  footerContainer: {
+    padding: 10,
+    alignItems: "center",
+  },
+  footerText: {
+    color: colors.purple, // Change to your desired color
+    fontSize: 16,
+    textDecorationLine: "underline", // Underline to indicate it's clickable
+  },
+  gameDetailsContainer: {
+    // padding: 10,
+    backgroundColor: colors.lightGray, // Style for dummy data container
+    borderRadius: 5,
+    marginTop: 10,
   },
 });
 

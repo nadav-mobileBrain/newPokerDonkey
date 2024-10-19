@@ -13,6 +13,7 @@ export default {
   darkGreen: "#107E4F",
   darkGray: "#333333",
   gray: "#666666",
+  lightGray: "#999999",
   primaryGradientArray: ["#8E2DE2", "#4A00E0"],
   secondaryGradientArray: ["#d3b939", "#ffd700"],
 };

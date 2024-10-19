@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     flex: 1,
-    backgroundColor: colors.light,
+    backgroundColor: colors.lightGray,
     marginHorizontal: 5,
   },
   imageContainer: {
