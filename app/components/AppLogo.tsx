@@ -3,6 +3,7 @@ import React from "react";
 import AppText from "./AppText";
 import colors from "../config/colors";
 import defaultStyles from "../config/styles";
+
 const AppLogo = () => {
   return (
     <View style={styles.container}>
@@ -15,20 +16,22 @@ const AppLogo = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    marginBottom: 2,
+    marginBottom: 3,
   },
   image: {
-    width: 40,
-    height: 40,
-    borderRadius: 30,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     borderColor: colors.gold,
     borderWidth: 2,
   },
   title: {
-    fontSize: 13,
+    fontSize: 16,
     fontFamily: "Roboto_700Bold",
     color: colors.gold,
     textDecorationLine: "underline",
+    marginTop: 5,
   },
 });
+
 export default AppLogo;

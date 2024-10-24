@@ -1,6 +1,7 @@
 export default {
   gold: "#FFD700",
   purple: "#6A0DAD",
+  navy: "#001F3F",
   white: "#FFFFFF",
   dark: "#0c0c0c",
   secondary: "#58E6D9",

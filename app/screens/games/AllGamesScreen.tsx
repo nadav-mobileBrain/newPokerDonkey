@@ -67,7 +67,6 @@ const AllGamesScreen = ({
       setContinuationToken(newToken || null);
 
       setIsLoading(false);
-      console.log("Fetched games:", newGames.length, "New token:", newToken);
     },
     [leagueId, getAllGamesForLeagueApi, isLoading]
   );

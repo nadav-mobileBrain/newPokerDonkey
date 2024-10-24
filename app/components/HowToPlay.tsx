@@ -47,10 +47,12 @@ const HowToPlay: React.FC<HowToPlayProps> = ({
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    paddingRight: 10,
-    paddingTop: 10,
+    marginTop: 10,
+    width: "100%",
+    alignSelf: "center",
   },
   button: {
+    width: 150,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: colors.blue,
@@ -66,6 +68,8 @@ const styles = StyleSheet.create({
   helpLink: {
     color: colors.white,
     fontSize: 18,
+    textAlign: "center",
+    fontFamily: "Roboto_700Bold",
     marginLeft: 5,
   },
 });

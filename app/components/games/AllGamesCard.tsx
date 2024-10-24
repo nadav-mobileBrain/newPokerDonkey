@@ -146,7 +146,9 @@ const AllGamesCard = ({ game }: any) => {
           <View style={styles.footerContainer}>
             <TouchableOpacity onPress={() => toggleGameDetails()}>
               <AppText style={styles.footerText}>
-                {gameDetails.length > 0 ? "Hide Game Log" : "Show Game Log"}
+                {gameDetails.length > 0
+                  ? "Hide Game Details"
+                  : "Show Game Details"}
               </AppText>
             </TouchableOpacity>
           </View>
@@ -230,8 +232,11 @@ const styles = StyleSheet.create({
     width: "100%",
     textAlign: "center",
     padding: 5,
+    fontWeight: "bold",
+    backgroundColor: colors.light,
     fontSize: 18, // Increased font size for emphasis
     color: colors.green,
+    borderRadius: 10,
     textShadowColor: colors.green,
     textShadowRadius: 1,
     textShadowOffset: { width: 1, height: 1 },

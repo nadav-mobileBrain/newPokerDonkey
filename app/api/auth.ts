@@ -20,6 +20,12 @@ const login = (userInfo: UserInfo): Promise<any> => {
   return client.post("api/users/login", userInfo);
 };
 
+const userRestored = (userInfo: UserInfo): Promise<any> => {
+  client.headers["Content-Type"] = "application/json";
+  return client.post("api/users/user-restored", userInfo);
+};
+
 export default {
   login,
+  userRestored,
 };

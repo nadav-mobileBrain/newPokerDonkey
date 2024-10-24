@@ -60,7 +60,7 @@ const LeaderStatsHeader = ({ leader, titles }: LeaderStatsHeaderProps) => {
           <MaterialCommunityIcons name="crown" size={24} color={colors.gold} />
         </View>
       </TouchableOpacity>
-      <Text style={styles.leaderName}>{leader.nickName}</Text>
+      <Text style={styles.leaderName}>1. {leader.nickName}</Text>
       <View style={styles.statsContainer}>
         <StatItem title={titles.cardTitle} value={leader.title} icon="trophy" />
         <StatItem
@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
   },
+
   statsContainer: {
     flexDirection: "row",
     justifyContent: "space-around",

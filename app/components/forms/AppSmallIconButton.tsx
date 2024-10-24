@@ -40,7 +40,7 @@ const AppSmallIconButton = ({
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={buttonStyle}
+        style={styles.button}
         onPress={onPress}
         accessibilityLabel={title}
         accessibilityHint={accessibilityHint}>
@@ -55,15 +55,17 @@ const AppSmallIconButton = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%", // Make the container take full width
-    alignItems: "center", // Center the button horizontally
+    alignItems: "center",
+    width: "100%",
+    alignSelf: "center",
     marginTop: 10,
   },
   button: {
+    width: 150,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center", // Center the content within the button
-    backgroundColor: colors.blue,
+    backgroundColor: colors.gold,
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 15,

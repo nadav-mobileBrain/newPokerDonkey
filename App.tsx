@@ -7,6 +7,8 @@ import { navigationRef } from "./app/navigation/rootNavigation";
 import AuthContext from "./app/auth/context";
 import authStorage from "./app/auth/storage";
 import Aptabase from "@aptabase/react-native";
+import authApi from "./app/api/auth";
+import useApi from "./app/hooks/useApi";
 import {
   Roboto_400Regular,
   Roboto_700Bold,
@@ -24,14 +26,15 @@ logger.start();
 export default function App() {
   const [user, setUser] = useState<any | null>(null);
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  const userRestoredApi = useApi(authApi.userRestored);
 
   const restoreUser = async () => {
     const user = await authStorage.getUser();
-    console.log("🚀 ~ restoreUser ~ user:", user);
 
     if (user) {
       setUser(user);
       Aptabase.trackEvent("User Restored", { user: JSON.stringify(user) });
+      await userRestoredApi.request(user);
     }
   };
 

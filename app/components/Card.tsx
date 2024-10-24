@@ -22,7 +22,7 @@ const Card = ({
   subTitle,
   imageUrl,
   onPress,
-  height = 200,
+  height = 150,
 }: CardProps) => {
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     color: colors.medium,
-    fontSize: 16,
+    fontSize: 18,
     marginVertical: 5,
     fontFamily: "Roboto_400Regular",
     opacity: 0.8,

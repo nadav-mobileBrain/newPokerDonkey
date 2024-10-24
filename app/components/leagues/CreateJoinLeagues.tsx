@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   button: {
-    backgroundColor: colors.purple,
+    backgroundColor: colors.lightBlue,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 25,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 13,
     fontFamily: "Roboto_700Bold",
-    color: colors.light,
+    color: colors.dark,
   },
 });
 
